@@ -111,7 +111,7 @@ Your portfolio will run at:
 ## 📧 Contact  
 **Atharva Bhosale**  
 📍 Pune, Maharashtra  
-📩 Email: **atharva7471@gmail.com**  
+📩 Email: **atharvaaabhosale@gmail.com**  
 🔗 LinkedIn: https://linkedin.com/in/atharva-bhosale-7471abc  
 🐙 GitHub: https://github.com/atharvaabhosale  
 🌐 Portfolio: https://athoofolio.vercel.app/  
