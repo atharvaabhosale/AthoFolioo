@@ -310,27 +310,45 @@ if (typeof gsap !== 'undefined') {
     }
   });
 
-  // ── GSAP Timeline Setup ────────────────────────────────────
-  gsap.set(navOverlay, { autoAlpha: 0 }); // Handles visibility and opacity
-  gsap.set(navLinks, { y: '100%', skewY: 5 });
-  gsap.set(navLeft, { y: 20, opacity: 0 });
+  // ── GSAP Timeline Setup (Cinematic Architectural Reveal) ──
+  gsap.set(navOverlay, { autoAlpha: 0 });
+  gsap.set(navLinks, { y: '125%', opacity: 0, rotateX: -14, transformOrigin: '50% 100%' });
+  gsap.set(navLeft, { x: -35, opacity: 0 });
 
-  const tl = gsap.timeline({ paused: true, defaults: { ease: M.gsap.expo } });
+  const navLeftItems = navLeft.querySelectorAll('.nav-brand-message, .nav-socials, .nav-status');
+  if (navLeftItems.length) {
+    gsap.set(navLeftItems, { y: 16, opacity: 0 });
+  }
 
-  tl.to(navOverlay, { autoAlpha: 1, duration: 0.6 })
-    .to(navLinks, {
-      y: '0%', 
-      skewY: 0, 
-      duration: 0.8, 
-      stagger: 0.1,
-      ease: 'power4.out'
-    }, "-=0.3")
-    .to(navLeft, {
-      y: 0, 
-      opacity: 1, 
-      duration: 0.6, 
-      ease: 'power3.out'
-    }, "-=0.5");
+  const tl = gsap.timeline({ paused: true });
+
+  tl.to(navOverlay, {
+    autoAlpha: 1,
+    duration: 0.5,
+    ease: 'power2.inOut',
+  })
+  .to(navLinks, {
+    y: '0%',
+    opacity: 1,
+    rotateX: 0,
+    duration: 0.85,
+    stagger: 0.065,
+    ease: 'power4.out',
+    clearProps: 'rotateX',
+  }, 0.12)
+  .to(navLeft, {
+    x: 0,
+    opacity: 1,
+    duration: 0.7,
+    ease: 'power3.out',
+  }, 0.16)
+  .to(navLeftItems, {
+    y: 0,
+    opacity: 1,
+    duration: 0.55,
+    stagger: 0.08,
+    ease: 'power3.out',
+  }, 0.26);
 
   function openMenu() {
     menuToggle.classList.add('active');
@@ -355,8 +373,8 @@ if (typeof gsap !== 'undefined') {
     document.body.style.overflow = '';
     if (typeof lenis !== 'undefined') lenis.start();
 
-    // Reverse animation fast
-    tl.timeScale(1.8).reverse().then(() => {
+    // Reverse animation smooth and fast
+    tl.timeScale(2.2).reverse().then(() => {
       navOverlay.classList.remove('active');
       header?.classList.remove('menu-active');
     });

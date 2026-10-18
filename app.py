@@ -15,6 +15,18 @@ import uuid
 import traceback
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+import dns.resolver
+
+# Configure dnspython nameservers with public DNS (Google, Cloudflare) fallback
+# to prevent WinError 10054 when local router/ISP DNS drops or refuses SRV queries
+try:
+    dns.resolver.default_resolver = dns.resolver.Resolver(configure=True)
+    dns.resolver.default_resolver.nameservers = ['8.8.8.8', '1.1.1.1'] + [
+        n for n in dns.resolver.default_resolver.nameservers if n not in ('8.8.8.8', '1.1.1.1')
+    ]
+except Exception:
+    dns.resolver.default_resolver = dns.resolver.Resolver(configure=False)
+    dns.resolver.default_resolver.nameservers = ['8.8.8.8', '1.1.1.1']
 
 # -------------------------
 # Configuration
@@ -802,6 +814,7 @@ if __name__ == "__main__":
     is_debug = os.environ.get("FLASK_DEBUG", "0") == "1"
     app.run(
         debug=is_debug,
+        use_reloader=False if (os.name == "nt" and is_debug) else is_debug,
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 5000))
     )
