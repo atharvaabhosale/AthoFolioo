@@ -75,7 +75,7 @@ This website showcases my **projects, skills, resume, achievements, and contact 
 
 ### 1️⃣ Clone Repository
 ```bash
-git clone https://github.com/atharva7471/atho-folio.git
+git clone https://github.com/atharvaabhosale/atho-folio.git
 ```
 
 ### 2️⃣ Install Dependencies
@@ -113,7 +113,7 @@ Your portfolio will run at:
 📍 Pune, Maharashtra  
 📩 Email: **atharva7471@gmail.com**  
 🔗 LinkedIn: https://linkedin.com/in/atharva-bhosale-7471abc  
-🐙 GitHub: https://github.com/atharva7471  
+🐙 GitHub: https://github.com/atharvaabhosale  
 🌐 Portfolio: https://athoofolio.vercel.app/  
 
 
