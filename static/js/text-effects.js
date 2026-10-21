@@ -24,6 +24,49 @@
 'use strict';
 
 (function initTextEnhancements() {
+  function setupRollingText(el, textOverride) {
+    if (!el) return;
+    const text = (textOverride !== undefined ? textOverride : (el.getAttribute('data-roll-text') || el.textContent)).trim();
+    if (!text) return;
+
+    el.setAttribute('data-roll-text', text);
+    el.setAttribute('aria-label', text);
+    el.innerHTML = '';
+
+    const track = document.createElement('span');
+    track.classList.add('roll-track');
+    track.setAttribute('aria-hidden', 'true');
+
+    const primary = document.createElement('span');
+    primary.classList.add('roll-primary');
+
+    const secondary = document.createElement('span');
+    secondary.classList.add('roll-secondary');
+
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      const displayChar = ch === ' ' ? '\u00A0' : ch;
+
+      const pSpan = document.createElement('span');
+      pSpan.textContent = displayChar;
+      pSpan.classList.add('roll-char');
+      pSpan.style.setProperty('--char-idx', i);
+      primary.appendChild(pSpan);
+
+      const sSpan = document.createElement('span');
+      sSpan.textContent = displayChar;
+      sSpan.classList.add('roll-char');
+      sSpan.style.setProperty('--char-idx', i);
+      secondary.appendChild(sSpan);
+    }
+
+    track.appendChild(primary);
+    track.appendChild(secondary);
+    el.appendChild(track);
+  }
+
+  window.setupRollingText = setupRollingText;
+
   function start() {
     // ── Guard 1: Respect user's motion preferences ──
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -381,42 +424,7 @@
       if (!rollElements.length) return;
 
       rollElements.forEach((el) => {
-        const text = el.textContent.trim();
-        if (!text) return;
-
-        el.setAttribute('aria-label', text);
-        el.innerHTML = '';
-
-        const track = document.createElement('span');
-        track.classList.add('roll-track');
-        track.setAttribute('aria-hidden', 'true');
-
-        const primary = document.createElement('span');
-        primary.classList.add('roll-primary');
-
-        const secondary = document.createElement('span');
-        secondary.classList.add('roll-secondary');
-
-        for (let i = 0; i < text.length; i++) {
-          const ch = text[i];
-          const displayChar = ch === ' ' ? '\u00A0' : ch;
-
-          const pSpan = document.createElement('span');
-          pSpan.textContent = displayChar;
-          pSpan.classList.add('roll-char');
-          pSpan.style.setProperty('--char-idx', i);
-          primary.appendChild(pSpan);
-
-          const sSpan = document.createElement('span');
-          sSpan.textContent = displayChar;
-          sSpan.classList.add('roll-char');
-          sSpan.style.setProperty('--char-idx', i);
-          secondary.appendChild(sSpan);
-        }
-
-        track.appendChild(primary);
-        track.appendChild(secondary);
-        el.appendChild(track);
+        setupRollingText(el);
       });
     })();
   }

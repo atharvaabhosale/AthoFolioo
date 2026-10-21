@@ -51,13 +51,13 @@
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='assets/images/profile/favicon.svg') }}" />
 
     <!-- Core Design System (Order matters: base → motion → components) -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}?v=3">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}?v=5">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main/base.css') }}?v=3">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main/motion.css') }}?v=3">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main/cursor.css') }}?v=3">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main/loader.css') }}?v=3">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main/animations.css') }}?v=3">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main/text-effects.css') }}?v=2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main/text-effects.css') }}?v=3">
     {% if hero_bgs %}
     <!-- Preload first hero image for LCP — fetchpriority ensures it wins bandwidth race -->
     <link rel="preload" as="image" href="{{ hero_bgs[0] }}" fetchpriority="high">
@@ -103,7 +103,7 @@
     <!-- Motion Engine (all animations) — loads before app.js -->
     <script defer src="{{ url_for('static', filename='js/motion.js') }}?v=6"></script>
     <!-- Text Effects (additive layer on top of motion.js) -->
-    <script defer src="{{ url_for('static', filename='js/text-effects.js') }}?v=2"></script>
+    <script defer src="{{ url_for('static', filename='js/text-effects.js') }}?v=3"></script>
     <!-- App Logic (data: comments, modals, form) -->
     <script defer src="{{ url_for('static', filename='js/app.js') }}?v=4"></script>
   </body>

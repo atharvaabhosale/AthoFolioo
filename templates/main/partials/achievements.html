@@ -1,8 +1,8 @@
 <!-- ─── Proof of Excellence ────────────────────────────────────── -->
-<section class="excellence-section py-[var(--space-10)] relative bg-bg max-md:isolate max-md:overflow-hidden" id="achievements">
+<section class="excellence-section pt-[clamp(3rem,5vw,4.5rem)] pb-[clamp(3.5rem,6vw,5rem)] relative bg-bg max-md:isolate max-md:overflow-hidden" id="achievements">
   
   <div class="excellence-container max-w-[1200px] mx-auto px-[var(--space-4)]">
-    <div class="excellence-header reveal text-left mb-[var(--space-8)]">
+    <div class="excellence-header reveal text-left">
       <h2 class="chapter-label block font-sans text-[clamp(0.7rem,1vw,0.85rem)] font-medium tracking-[0.2em] uppercase text-text-secondary mb-[clamp(2rem,4vh,3rem)]">05 / Certificates Collected</h2>
     </div>
 
@@ -45,7 +45,7 @@
       
       {% if certificates|length > 3 %}
       <div class="excellence-actions flex justify-center mt-[var(--space-6)] reveal {% if certificates|length <= 6 %}mobile-only-btn hidden max-md:!flex{% endif %}">
-        <button class="expand-certs-btn inline-flex items-center mb-[1rem] gap-[0.8rem] px-[2rem] py-[1rem] bg-[rgba(20,20,25,0.8)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.1)] rounded-[40px] text-text-primary text-[1rem] cursor-pointer transition-all duration-[0.3s] ease uppercase tracking-[0.1em] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.3)] hover:-translate-y-[3px] hover:shadow-[0_10px_20px_rgba(0,0,0,0.3)] group/btn" id="toggleCertsBtn">
+        <button class="expand-certs-btn inline-flex items-center mb-[20px] gap-[0.8rem] px-[2rem] py-[1rem] bg-[rgba(20,20,25,0.8)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.1)] rounded-[40px] text-text-primary text-[1rem] cursor-pointer transition-all duration-[0.3s] ease uppercase tracking-[0.1em] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.3)] hover:-translate-y-[3px] hover:shadow-[0_10px_20px_rgba(0,0,0,0.3)] group/btn" id="toggleCertsBtn" style="margin-bottom: 20px;">
           <span class="btn-text roll-hover">View All Credentials</span>
           <i class="bi bi-chevron-down text-[1.2rem] transition-transform duration-[0.3s] ease"></i>
         </button>
@@ -93,6 +93,7 @@
 <script>
   function openCertModal(cert) {
     const modal = document.getElementById('certModal');
+    if (!modal) return;
     
     document.getElementById('certModalImg').src = cert.imageUrl || '';
     document.getElementById('certModalImg').alt = cert.title || 'Certificate';
@@ -126,15 +127,29 @@
 
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    if (typeof getLenis === 'function') getLenis()?.stop();
+    else if (window.lenis) window.lenis.stop();
   }
 
   function closeCertModal(event) {
-    if (event.target.id === 'certModal' || event.target.className.includes('cert-modal-close')) {
-      const modal = document.getElementById('certModal');
+    const modal = document.getElementById('certModal');
+    if (!modal) return;
+    if (!event || event.target.id === 'certModal' || (event.target.classList && event.target.classList.contains('cert-modal-close')) || event.key === 'Escape') {
       modal.style.display = 'none';
       document.body.style.overflow = '';
+      if (typeof getLenis === 'function') getLenis()?.start();
+      else if (window.lenis) window.lenis.start();
     }
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('certModal');
+      if (modal && modal.style.display === 'flex') {
+        closeCertModal(e);
+      }
+    }
+  });
 
   document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById('toggleCertsBtn');
@@ -157,7 +172,11 @@
             cert.classList.add('show-cert');
             cert.style.transitionDelay = `${index * 0.1}s`;
           });
-          btnText.textContent = 'Show Less';
+          if (window.setupRollingText && btnText && btnText.classList.contains('roll-hover')) {
+            window.setupRollingText(btnText, 'Show Less');
+          } else if (btnText) {
+            btnText.textContent = 'Show Less';
+          }
           btnIcon.classList.remove('bi-chevron-down');
           btnIcon.classList.add('bi-chevron-up');
         } else {
@@ -170,7 +189,11 @@
               if(!isExpanded) cert.style.display = ''; // Empty string lets CSS take over
             }, 400); // Matches CSS transition duration
           });
-          btnText.textContent = 'View All Credentials';
+          if (window.setupRollingText && btnText && btnText.classList.contains('roll-hover')) {
+            window.setupRollingText(btnText, 'View All Credentials');
+          } else if (btnText) {
+            btnText.textContent = 'View All Credentials';
+          }
           btnIcon.classList.remove('bi-chevron-up');
           btnIcon.classList.add('bi-chevron-down');
 

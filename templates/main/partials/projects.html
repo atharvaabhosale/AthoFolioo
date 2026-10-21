@@ -133,15 +133,15 @@
   </div>
   
   {% if projects|length > 3 %}
-  <div class="flex justify-center mt-12 mb-8 reveal {% if projects|length <= 4 %}mobile-only-btn hidden max-md:!flex{% endif %}">
-    <button class="inline-flex items-center gap-[0.8rem] px-[2rem] py-[1rem] bg-[rgba(20,20,25,0.8)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.1)] rounded-[40px] text-white text-[1rem] cursor-pointer transition-all duration-[0.3s] ease uppercase tracking-[0.1em] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.3)] hover:-translate-y-[3px] hover:shadow-[0_10px_20px_rgba(0,0,0,0.3)] group/btn" id="toggleProjBtn">
-      <span class="btn-text">View All Projects</span>
+  <div class="flex justify-center mt-8 mb-4 reveal {% if projects|length <= 4 %}mobile-only-btn hidden max-md:!flex{% endif %}">
+    <button class="inline-flex items-center mb-[10px] gap-[0.8rem] px-[2rem] py-[1rem] bg-[rgba(20,20,25,0.8)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.1)] rounded-[40px] text-white text-[1rem] cursor-pointer transition-all duration-[0.3s] ease uppercase tracking-[0.1em] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.3)] hover:-translate-y-[3px] hover:shadow-[0_10px_20px_rgba(0,0,0,0.3)] group/btn" id="toggleProjBtn" style="margin-bottom: 10px;">
+      <span class="btn-text roll-hover">View All Projects</span>
       <i class="bi bi-chevron-down text-[1.2rem] transition-transform duration-[0.3s] ease"></i>
     </button>
   </div>
   {% endif %}
 
-  <div class="h-[clamp(4rem,8vw,8rem)]"></div>
+  <div class="h-[clamp(2.5rem,4vw,3.5rem)]"></div>
 
   <!-- PROJECT CASE STUDY MODAL -->
   <div class="proj-modal group/modal fixed inset-0 z-[2000] flex items-center justify-center p-4 sm:p-4 max-sm:p-0 max-sm:items-end pointer-events-none opacity-0 transition-opacity duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] [&.open]:opacity-100 [&.open]:pointer-events-auto" id="projModal" role="dialog" aria-modal="true" aria-labelledby="projModalTitle" aria-hidden="true">
@@ -199,7 +199,11 @@
             proj.classList.add('show-proj');
             proj.style.transitionDelay = `${index * 0.1}s`;
           });
-          btnText.textContent = 'Show Less';
+          if (window.setupRollingText && btnText && btnText.classList.contains('roll-hover')) {
+            window.setupRollingText(btnText, 'Show Less');
+          } else if (btnText) {
+            btnText.textContent = 'Show Less';
+          }
           btnIcon.classList.remove('bi-chevron-down');
           btnIcon.classList.add('bi-chevron-up');
         } else {
@@ -210,7 +214,11 @@
               if(!isExpanded) proj.style.display = '';
             }, 400);
           });
-          btnText.textContent = 'View All Projects';
+          if (window.setupRollingText && btnText && btnText.classList.contains('roll-hover')) {
+            window.setupRollingText(btnText, 'View All Projects');
+          } else if (btnText) {
+            btnText.textContent = 'View All Projects';
+          }
           btnIcon.classList.remove('bi-chevron-up');
           btnIcon.classList.add('bi-chevron-down');
 

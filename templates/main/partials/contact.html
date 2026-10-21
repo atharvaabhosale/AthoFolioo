@@ -1,5 +1,5 @@
 <!-- ─── The Conclusion (Contact) ────────────────────────────── -->
-<section class="contact-conclusion relative pt-[clamp(6rem,10vw,8rem)] pb-[clamp(4rem,6vw,6rem)] flex flex-col justify-center bg-[#000] overflow-hidden" id="contact">
+<section class="contact-conclusion relative pt-[clamp(5rem,8vw,7rem)] pb-[clamp(3rem,5vw,4.5rem)] flex flex-col justify-center bg-[#000] overflow-hidden" id="contact">
   <div class="contact-spotlight absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[80vh] bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,rgba(0,0,0,0)_70%)] rounded-full pointer-events-none z-0"></div>
 
   <div class="container contact-container relative z-[1]">
@@ -7,6 +7,7 @@
     <div class="contact-grid grid grid-cols-2 gap-[var(--space-12)] items-center max-lg:grid-cols-1 max-lg:gap-[var(--space-8)]">
       <!-- Left: Contact Info -->
       <div class="contact-narrative reveal">
+        <h2 class="chapter-label block font-sans text-[clamp(0.7rem,1vw,0.85rem)] font-medium tracking-[0.2em] uppercase text-text-secondary mb-[clamp(2rem,4vh,3rem)]">06 / Contact</h2>
         <h2 class="epic-title text-[clamp(3rem,5vw,4.5rem)] uppercase font-display font-black text-text-primary leading-[1.1] mb-[var(--space-8)]"><span class="title-outline text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.85)] relative spotlight-outline-text">LET'S</span> <br>CONNECT!!</h2>
         
         <div class="contact-profile flex flex-col gap-[var(--space-4)] mt-[var(--space-2)]">
@@ -78,18 +79,44 @@
   </div>
 </section>
 
+<!-- ─── Section Divider: Contact to Testimonials ──────────────────────── -->
+<div class="section-divider relative w-full overflow-hidden my-[clamp(1.5rem,2.5vw,2.5rem)] flex items-center justify-center select-none" aria-hidden="true">
+  <!-- Ambient glow bloom in center -->
+  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,700px)] h-[24px] bg-[radial-gradient(ellipse_at_center,rgba(90,120,255,0.18)_0%,transparent_75%)] blur-[12px] pointer-events-none"></div>
+
+  <div class="w-full max-w-[1400px] mx-auto px-[5vw] flex items-center gap-3 relative z-10">
+    <!-- Left dashed line into laser line -->
+    <div class="flex-1 flex items-center">
+      <div class="flex-1 h-[1px] bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.06)_50%,rgba(255,255,255,0.18)_100%)] [mask-image:repeating-linear-gradient(90deg,#000_0px,#000_6px,transparent_6px,transparent_10px)]"></div>
+      <div class="w-20 md:w-36 h-[1px] bg-[linear-gradient(90deg,rgba(255,255,255,0.18)_0%,rgba(90,120,255,0.8)_100%)] shadow-[0_0_10px_rgba(90,120,255,0.6)]"></div>
+    </div>
+
+    <!-- Center Glowing Accent Node -->
+    <div class="w-2 h-2 rounded-full bg-[#5a78ff] shadow-[0_0_10px_#5a78ff,0_0_20px_rgba(90,120,255,0.6)] shrink-0 animate-pulse"></div>
+
+    <!-- Right laser line into dashed line -->
+    <div class="flex-1 flex items-center">
+      <div class="w-20 md:w-36 h-[1px] bg-[linear-gradient(90deg,rgba(90,120,255,0.8)_0%,rgba(255,255,255,0.18)_100%)] shadow-[0_0_10px_rgba(90,120,255,0.6)]"></div>
+      <div class="flex-1 h-[1px] bg-[linear-gradient(90deg,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0.06)_50%,transparent_100%)] [mask-image:repeating-linear-gradient(90deg,#000_0px,#000_6px,transparent_6px,transparent_10px)]"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ─── Testimonials (Proof of Excellence) ────────────────────────────── -->
-<section class="testimonial-section relative py-[clamp(4rem,8vw,8rem)] bg-bg overflow-hidden isolate reveal" id="comments">
+<section class="testimonial-section relative pt-[clamp(3rem,5vw,4.5rem)] pb-[clamp(4rem,6vw,6rem)] bg-bg overflow-hidden isolate reveal" id="comments">
   <!-- Subtle futuristic background treatment -->
   <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(74,144,226,0.03)_0%,transparent_60%)] pointer-events-none -z-10"></div>
   <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none -z-10"></div>
 
-  <div class="container max-w-[1400px] mx-auto relative z-10">
+  <div class="container max-w-[1400px] mx-auto relative z-10 px-[5vw]">
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-[3rem] lg:gap-[4rem] items-center">
       
       <!-- Left Column: Editorial Info -->
       <div class="flex flex-col max-lg:text-center max-lg:items-center">
-        <h2 class="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-bold text-text-primary uppercase leading-[1.1] mb-[1.5rem]">What Others Say</h2>
+        <h2 class="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-black text-text-primary uppercase leading-[1.08] mb-[1.5rem]">
+          <span class="text-transparent [-webkit-text-stroke:2px_rgba(255,255,255,0.85)] relative spotlight-outline-text inline-block">WHAT</span><br>
+          <span>OTHERS SAY<span class="text-[#5a78ff]/90">.</span></span>
+        </h2>
         
         <p class="text-[1.1rem] text-text-secondary leading-[1.6] max-w-[400px]">
           Real feedback from people I've collaborated with, worked alongside and connected with.
