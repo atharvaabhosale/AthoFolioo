@@ -340,9 +340,329 @@
   border-radius: var(--radius-md);
 }
 
+/* ── Minimal Mountain Slideshow Countdown & Progress Line ───── */
+.hero-countdown-minimal {
+  position: absolute;
+  bottom: clamp(24px, 4vh, 36px);
+  right: 5vw;
+  z-index: 15;
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.hero-countdown-label {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: clamp(0.56rem, 0.72vw, 0.64rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(205, 220, 245, 0.45);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+
+.hero-countdown-label .hero-countdown-val {
+  color: rgba(240, 245, 255, 0.72);
+  font-weight: 500;
+  display: inline-block;
+  min-width: 2.2ch;
+  text-align: right;
+  text-shadow: 0 0 6px rgba(129, 140, 248, 0.35);
+}
+
+.hero-countdown-track {
+  width: clamp(96px, 8vw, 115px);
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-countdown-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.85), rgba(167, 139, 250, 0.95));
+  transform-origin: left;
+  will-change: transform;
+  box-shadow: 0 0 6px rgba(129, 140, 248, 0.5);
+  transition: transform 0.1s linear;
+}
+
+/* Ensure hero CTA buttons always sit in front of the snowboarding character */
+.hero-cta-group {
+  position: relative;
+  z-index: 20;
+}
+
+/* ── Snowboarding Boy (28s Cinematic Mountain Journey) ──────── */
+.hero-skater-track {
+  position: absolute;
+  bottom: clamp(28px, 4.5vh, 48px);
+  left: 0;
+  width: 100%;
+  height: 90px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 8;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 90px, rgba(0, 0, 0, 1) calc(100% - 90px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 90px, rgba(0, 0, 0, 1) calc(100% - 90px), transparent 100%);
+}
+
+.hero-skater-mover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  pointer-events: auto;
+  will-change: transform;
+  animation: skater-journey-rtl 28s linear infinite;
+}
+
+/* 28-second Right-to-Left Journey with soft feathered fade-in and fade-out */
+@keyframes skater-journey-rtl {
+  0% {
+    transform: translate3d(calc(100vw + 90px), 0, 0);
+    opacity: 0;
+  }
+  1.5% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  97.5% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(-110px, 0, 0);
+    opacity: 0;
+  }
+}
+
+/* Snowboarder Interactive Button */
+.hero-skater-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+  border-radius: 9999px;
+  transition: transform 0.2s ease;
+}
+
+.hero-skater-btn:focus-visible {
+  outline: 1.5px solid rgba(147, 197, 253, 0.6);
+  outline-offset: 4px;
+}
+
+.hero-skater-figure {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Small Natural Snowboarder in Vast Mountain Landscape (35-50px) */
+.hero-skater-img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  animation: snowboarder-carve 1.6s ease-in-out infinite alternate;
+  transform-origin: 50% 95%;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
+  transition: filter 0.25s ease;
+}
+
+.hero-skater-btn:hover .hero-skater-img {
+  filter: drop-shadow(0 0 8px rgba(147, 197, 253, 0.7)) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
+}
+
+/* Natural Snowboarding/Gliding Body & Board Movement */
+@keyframes snowboarder-carve {
+  0% {
+    transform: translateY(0px) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-1.5px) rotate(-3.5deg);
+  }
+  100% {
+    transform: translateY(0.5px) rotate(-2deg);
+  }
+}
+
+/* Subtle Snow Carve Shadow Under Board */
+.hero-skater-shadow {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 3px;
+  background: radial-gradient(ellipse at center, rgba(10, 16, 32, 0.6) 0%, rgba(200, 225, 255, 0.1) 60%, transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(0.8px);
+}
+
+/* Slight Snow Trail / Spray Behind Board */
+.hero-skater-spray {
+  position: absolute;
+  bottom: 0px;
+  right: -5px;
+  width: 14px;
+  height: 5px;
+  background: radial-gradient(ellipse at left, rgba(255, 255, 255, 0.45) 0%, rgba(180, 215, 255, 0.2) 40%, transparent 80%);
+  border-radius: 50%;
+  filter: blur(1.5px);
+  animation: snow-spray-puff 0.8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes snow-spray-puff {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.8) translateX(0);
+  }
+  100% {
+    opacity: 0.65;
+    transform: scale(1.15) translateX(2px);
+  }
+}
+
+/* ── Minimal Subtle Thought Bubble ──────────────────────────── */
+/* Appears during right half of hero; fades smoothly at midpoint (46%) */
+.hero-skater-thought {
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%) translateY(0) scale(1);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+  white-space: nowrap;
+  animation: thought-bubble-journey 28s linear infinite;
+}
+
+@keyframes thought-bubble-journey {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px) scale(0.88);
+    visibility: hidden;
+  }
+  2.5% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px) scale(0.88);
+    visibility: visible;
+  }
+  5.5% {
+    /* Entering right side of screen: smoothly reveal */
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+    visibility: visible;
+  }
+  36% {
+    /* Travelling across right half: comfortably readable */
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+    visibility: visible;
+  }
+  45% {
+    /* Reaching horizontal midpoint (50vw): smoothly fade out */
+    opacity: 0;
+    transform: translateX(-50%) translateY(-3px) scale(0.92);
+    visibility: visible;
+  }
+  47%, 100% {
+    /* Left half of screen: completely hidden */
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px) scale(0.88);
+    visibility: hidden;
+  }
+}
+
+/* Small, subtle bubble with minimal styling */
+.hero-skater-thought .thought-text {
+  display: block;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  color: rgba(255, 255, 255, 0.94);
+  padding: 4px 11px;
+  border-radius: 9999px;
+  background: rgba(12, 16, 28, 0.84);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Subtle pointer dot beneath bubble */
+.hero-skater-thought .thought-bubble-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(12, 16, 28, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Optional click override (if clicked, temporarily show thought) */
+.hero-skater-thought.thought-force-active {
+  animation: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateX(-50%) translateY(0) scale(1) !important;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .hero-skater-track {
+    bottom: 16px;
+    height: 70px;
+  }
+  .hero-skater-img {
+    height: 32px;
+  }
+  .hero-skater-thought {
+    bottom: calc(100% + 5px);
+  }
+  .hero-skater-thought .thought-text {
+    font-size: 0.62rem;
+    padding: 3px 9px;
+  }
+  .hero-countdown-minimal {
+    bottom: 16px;
+    right: 5vw;
+  }
+  .hero-countdown-label {
+    font-size: 0.54rem;
+    letter-spacing: 0.16em;
+  }
+  .hero-countdown-track {
+    width: 85px;
+  }
+}
 
 /* ── Reduced Motion Overrides ────────────────────────────────── */
-
 @media (prefers-reduced-motion: reduce) {
   [data-reveal],
   [data-reveal="blur"],
@@ -365,5 +685,24 @@
 
   .animated-link::after {
     transition: none !important;
+  }
+
+  .hero-skater-mover {
+    animation: none !important;
+    transform: translate3d(65vw, 0, 0) !important;
+    opacity: 1 !important;
+  }
+
+  .hero-skater-thought {
+    animation: none !important;
+    opacity: 0.9 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) scale(1) !important;
+  }
+
+  .hero-skater-img,
+  .hero-skater-spray {
+    animation: none !important;
+    transform: none !important;
   }
 }

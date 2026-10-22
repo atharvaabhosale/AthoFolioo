@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <div class="hero-cta-group relative z-[1] flex items-center gap-[clamp(1.2rem,2.5vw,1.8rem)] mt-[clamp(44px,6vh,60px)] opacity-0 scale-[0.9] will-change-[transform,opacity] max-md:flex-col max-md:items-start max-md:gap-[0.75rem]" id="heroCtas">
+      <div class="hero-cta-group relative z-[20] flex items-center gap-[clamp(1.2rem,2.5vw,1.8rem)] mt-[clamp(44px,6vh,60px)] opacity-0 scale-[0.9] will-change-[transform,opacity] max-md:flex-col max-md:items-start max-md:gap-[0.75rem]" id="heroCtas">
         <a href="#projects" class="btn-hero-primary inline-flex items-center gap-[0.75rem] px-[1.8rem] py-[0.85rem] bg-[rgba(255,255,255,0.96)] text-[#000] rounded-full font-sans text-[clamp(0.8rem,1.1vw,0.9rem)] font-medium tracking-[0.04em] no-underline relative overflow-hidden transition-all duration-normal will-change-transform shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.05)] hover:bg-[#ffffff] hover:-translate-y-[3px] hover:shadow-[0_16px_48px_rgba(255,255,255,0.18)] active:scale-[0.96] active:transition-transform active:duration-[0ms] group max-md:w-full max-md:justify-center">
           <span class="btn-hero-label roll-hover">Explore My Work</span>
           <span class="btn-hero-icon flex items-center justify-center transition-transform duration-normal group-hover:translate-x-[3px] group-hover:-translate-y-[2px]" aria-hidden="true">
@@ -52,6 +52,16 @@
         </a>
       </div>
 
+      <!-- ── Minimal Countdown & Progress Line (Bottom-Right Corner) ── -->
+      <div class="hero-countdown-minimal absolute bottom-[clamp(24px,4vh,36px)] right-[5vw] z-[15] flex flex-col items-end gap-[6px] select-none pointer-events-none" id="heroCountdownMinimal" aria-live="off">
+        <div class="hero-countdown-label font-mono text-[0.58rem] sm:text-[0.64rem] tracking-[0.22em] uppercase text-[rgba(205,220,245,0.45)] whitespace-nowrap drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)]">
+          NEXT VIEW IN <span class="hero-countdown-val font-medium text-[rgba(240,245,255,0.7)]" id="heroCountdownVal">15s</span>
+        </div>
+        <div class="hero-countdown-track w-[96px] sm:w-[110px] h-[1.5px] bg-[rgba(255,255,255,0.12)] rounded-full overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.5)]" aria-hidden="true">
+          <div class="hero-countdown-fill h-full w-full bg-[linear-gradient(90deg,rgba(99,102,241,0.85),rgba(167,139,250,0.95))] origin-left will-change-transform shadow-[0_0_6px_rgba(129,140,248,0.5)]" id="heroCountdownProgress" style="transform: scaleX(0);"></div>
+        </div>
+      </div>
+
       <a href="#about" class="hero-scroll-cue absolute bottom-[clamp(40px,6vh,60px)] left-1/2 -translate-x-1/2 flex flex-col items-center gap-[12px] opacity-0 will-change-[opacity,transform] no-underline z-[15] transition-transform duration-[0.3s] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-[4px] max-md:!hidden group/scroll" id="heroScrollCue" aria-label="Scroll down">
         <div class="mouse-scroll-indicator w-[22px] h-[34px] border-[1.5px] border-[rgba(255,255,255,0.25)] rounded-[12px] relative flex justify-center shadow-[0_0_12px_rgba(255,255,255,0.03)] transition-all duration-[0.4s] will-change-[border-color,box-shadow] group-hover/scroll:border-[rgba(255,255,255,0.5)] group-hover/scroll:shadow-[0_0_16px_rgba(255,255,255,0.08)]">
           <div class="mouse-dot w-[4px] h-[6px] bg-[rgba(255,255,255,0.85)] rounded-[4px] mt-[6px] shadow-[0_0_6px_rgba(99,102,241,0.6)] animate-[mouse-scroll-dot_2.2s_cubic-bezier(0.65,0,0.35,1)_infinite] will-change-[transform,opacity]"></div>
@@ -59,7 +69,26 @@
         <span class="scroll-cue-label font-sans text-[0.65rem] tracking-[0.25em] uppercase text-[rgba(255,255,255,0.35)] transition-colors duration-[0.4s] group-hover/scroll:text-[rgba(255,255,255,0.9)]">Explore</span>
       </a>
 
+    </div>
 
+    <!-- ── Snowboarding Boy (Full Viewport Track Behind Buttons) ── -->
+    <div class="hero-skater-track absolute bottom-[clamp(28px,4.5vh,48px)] left-0 w-full overflow-hidden pointer-events-none z-[8]" id="heroSkaterTrack">
+      <div class="hero-skater-mover" id="heroSkaterMover">
+        <button type="button" class="hero-skater-btn" id="skaterBtn" aria-label="A boy snowboarding across the mountains. Click to hear his thoughts." aria-expanded="false" aria-controls="skaterThought">
+          <!-- Thought Bubble: Visible during right half, fades at horizontal midpoint -->
+          <div class="hero-skater-thought" id="skaterThought" role="status" aria-live="polite">
+            <span class="thought-text" id="skaterThoughtText">Hello there! 👋 How are you?</span>
+            <span class="thought-bubble-dot" aria-hidden="true"></span>
+          </div>
+
+          <!-- Snowboarder Character Image & Subtle Snow Gliding Trail -->
+          <div class="hero-skater-figure">
+            <img src="{{ url_for('static', filename='assets/images/skater.png') }}" alt="Boy snowboarding across the snowy mountain landscape" class="hero-skater-img" width="42" height="48" loading="eager" decoding="async" />
+            <div class="hero-skater-shadow" aria-hidden="true"></div>
+            <div class="hero-skater-spray" aria-hidden="true"></div>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 </section>

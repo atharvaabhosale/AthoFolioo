@@ -385,6 +385,23 @@ if (typeof gsap !== 'undefined') {
     menuToggle.classList.contains('active') ? closeMenu() : openMenu();
   });
 
+  // Logo click -> smooth scroll to hero section
+  const navLogo = document.getElementById('navLogo') || document.querySelector('.nav-logo');
+  if (navLogo) {
+    navLogo.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (menuToggle.classList.contains('active')) {
+        closeMenu();
+      }
+      const target = document.getElementById('home') || 0;
+      if (typeof lenis !== 'undefined') {
+        lenis.scrollTo(target, { offset: 0, duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
   // Link click -> close menu then scroll
   navLinks.forEach((link) => {
     link.addEventListener('click', (e) => {
@@ -493,6 +510,15 @@ function runHeroSequence() {
     { scale: 1, opacity: 1, duration: M.dur.slow, ease: M.gsap.spring },
     1.4
   );
+
+  // Minimal countdown fades in softly
+  if (document.getElementById('heroCountdownMinimal')) {
+    tl.fromTo('#heroCountdownMinimal',
+      { opacity: 0 },
+      { opacity: 1, duration: M.dur.slow, ease: 'power2.out' },
+      1.6
+    );
+  }
 
   // Scroll cue fades in last
   tl.to('#heroScrollCue',

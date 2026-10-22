@@ -387,8 +387,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* ── Hero Background Auto-Slider ──────────────────────────── */
+  /* ── Hero Background Auto-Slider, Countdown & Progress Line ─── */
   const heroBgElement = document.querySelector('.hero-mountain-image');
+  const countdownEl = document.getElementById('heroCountdownVal');
+  const countdownProgressEl = document.getElementById('heroCountdownProgress');
+  const heroSkaterMover = document.getElementById('heroSkaterMover');
+  const skaterBtn = document.getElementById('skaterBtn');
+  const skaterThought = document.getElementById('skaterThought');
+  const skaterThoughtText = document.getElementById('skaterThoughtText');
+
   if (heroBgElement) {
     const bgImages = window.HERO_WALLPAPERS || [
       '/static/assets/images/mountain1.webp',
@@ -397,17 +404,185 @@ document.addEventListener('DOMContentLoaded', () => {
       '/static/assets/images/mountain4.webp',
       '/static/assets/images/mountain5.webp'
     ];
-    let currentBgIndex = 0;
 
     if (bgImages.length > 1) {
-      setInterval(() => {
+      let currentBgIndex = 0;
+      const SLIDE_INTERVAL_MS = 15000;
+      const FADE_DURATION_MS = 1000; // Matches CSS transition-opacity duration-[1s]
+      let slideStartTime = Date.now();
+      let isTransitioning = false;
+      let syncIntervalId = null;
+
+      // Updates countdown digits and thin progress line based on true elapsed time
+      function updateCountdownUI(remainingMs) {
+        const remainingSec = Math.max(0, Math.ceil(remainingMs / 1000));
+        const formattedSec = String(remainingSec).padStart(2, '0') + 's';
+
+        if (countdownEl && countdownEl.textContent !== formattedSec) {
+          countdownEl.textContent = formattedSec;
+        }
+
+        if (countdownProgressEl) {
+          const elapsed = Math.max(0, Math.min(SLIDE_INTERVAL_MS, SLIDE_INTERVAL_MS - remainingMs));
+          const progressRatio = elapsed / SLIDE_INTERVAL_MS;
+          countdownProgressEl.style.transform = `scaleX(${progressRatio.toFixed(4)})`;
+        }
+      }
+
+      // Triggers the background image transition; resets countdown & progress line precisely
+      function advanceSlide() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        // Visual transition: fade out current wallpaper
         heroBgElement.style.opacity = '0';
+
+        // Preload next image to ensure instantaneous rendering
+        const nextIndex = (currentBgIndex + 1) % bgImages.length;
+        const preloader = new Image();
+        preloader.src = bgImages[nextIndex];
+
         setTimeout(() => {
-          currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+          currentBgIndex = nextIndex;
           heroBgElement.style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
           heroBgElement.style.opacity = '1';
-        }, 1000); // CSS transition is 1s
-      }, 15000);
+
+          // Reset the single timer clock right as the new view is presented
+          slideStartTime = Date.now();
+          isTransitioning = false;
+          updateCountdownUI(SLIDE_INTERVAL_MS);
+          // Note: Snowboarder movement remains completely independent on his 28s journey
+        }, FADE_DURATION_MS);
+      }
+
+      // Synchronized tick: evaluates remaining time against the single start timestamp
+      function syncTick() {
+        if (isTransitioning) return;
+
+        const now = Date.now();
+        const elapsed = now - slideStartTime;
+
+        if (elapsed >= SLIDE_INTERVAL_MS) {
+          advanceSlide();
+        } else {
+          const remaining = SLIDE_INTERVAL_MS - elapsed;
+          updateCountdownUI(remaining);
+        }
+      }
+
+      // Initialize UI immediately with 15s remaining and progress at 0
+      updateCountdownUI(SLIDE_INTERVAL_MS);
+
+      // Single synchronized interval running at 100ms for drift-free countdown & progress bar
+      syncIntervalId = setInterval(syncTick, 100);
+
+      // Handle tab visibility changes to guarantee accurate countdown and progress line
+      function handleVisibilityChange() {
+        if (!document.hidden && !isTransitioning) {
+          const elapsed = Date.now() - slideStartTime;
+          if (elapsed >= SLIDE_INTERVAL_MS) {
+            advanceSlide();
+          } else {
+            updateCountdownUI(SLIDE_INTERVAL_MS - elapsed);
+          }
+        }
+      }
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+
+      // Clean up intervals and listeners on page unload
+      window.addEventListener('beforeunload', () => {
+        if (syncIntervalId) clearInterval(syncIntervalId);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      });
+    }
+  }
+
+  /* ── Snowboarding Boy: Rotating Thoughts On Every Journey ──── */
+  if (heroSkaterMover && skaterThoughtText) {
+    const THOUGHT_MESSAGES = [
+      "Hello there! 👋 How are you?",
+      "Enjoying the view? 🏔️",
+      "One step at a time.",
+      "Still figuring things out...",
+      "Keep going, you're getting there.",
+      "Just passing through! 👋",
+      "Big dreams, small steps.",
+      "Hope you're having a good day!",
+      "Somewhere between lost and inspired.",
+      "Well, this is a nice view!",
+      "Keep exploring. Keep building.",
+      "See you at the summit! 🏂"
+    ];
+
+    let currentThoughtIndex = -1;
+
+    // Selects a new message avoiding consecutive duplicates
+    function getNextThoughtMessage() {
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * THOUGHT_MESSAGES.length);
+      } while (nextIndex === currentThoughtIndex && THOUGHT_MESSAGES.length > 1);
+      currentThoughtIndex = nextIndex;
+      return THOUGHT_MESSAGES[currentThoughtIndex];
+    }
+
+    let lastRoundTimestamp = 0;
+
+    function applyNextThought() {
+      const now = Date.now();
+      // Enforce strictly one message per round (28s loop; debounce threshold 15s)
+      if (lastRoundTimestamp !== 0 && (now - lastRoundTimestamp) < 15000) return;
+      lastRoundTimestamp = now;
+
+      const msg = getNextThoughtMessage();
+      skaterThoughtText.textContent = msg;
+    }
+
+    // Set initial message for the first round
+    applyNextThought();
+
+    // Every time the 28s journey repeats and restarts from the right, change message
+    heroSkaterMover.addEventListener('animationiteration', (e) => {
+      // Prevent event bubbling from child micro-animations (board carve, snow spray)
+      if (e.target !== heroSkaterMover || e.animationName !== 'skater-journey-rtl') return;
+      applyNextThought();
+    });
+
+    // Optional click interaction: temporarily highlights thought if visitor clicks character
+    if (skaterBtn && skaterThought) {
+      let clickTimer = null;
+
+      skaterBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (clickTimer) clearTimeout(clickTimer);
+
+        skaterThought.classList.add('thought-force-active');
+        skaterBtn.setAttribute('aria-expanded', 'true');
+
+        clickTimer = setTimeout(() => {
+          skaterThought.classList.remove('thought-force-active');
+          skaterBtn.setAttribute('aria-expanded', 'false');
+        }, 4000);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (skaterThought.classList.contains('thought-force-active')) {
+          if (!skaterThought.contains(e.target) && !skaterBtn.contains(e.target)) {
+            skaterThought.classList.remove('thought-force-active');
+            skaterBtn.setAttribute('aria-expanded', 'false');
+            if (clickTimer) clearTimeout(clickTimer);
+          }
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && skaterThought.classList.contains('thought-force-active')) {
+          skaterThought.classList.remove('thought-force-active');
+          skaterBtn.setAttribute('aria-expanded', 'false');
+          skaterBtn.focus();
+          if (clickTimer) clearTimeout(clickTimer);
+        }
+      });
     }
   }
 
@@ -452,4 +627,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  /* ── Navbar Logo Smooth Scroll to Hero ─────────────────────── */
+  const navLogo = document.getElementById('navLogo') || document.querySelector('.nav-logo');
+  if (navLogo) {
+    navLogo.addEventListener('click', (e) => {
+      e.preventDefault();
+      const menuToggle = document.getElementById('menuToggle');
+      if (menuToggle && menuToggle.classList.contains('active')) {
+        menuToggle.click();
+      }
+      const target = document.querySelector('#home') || 0;
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.scrollTo(target, { offset: 0, duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
 });
