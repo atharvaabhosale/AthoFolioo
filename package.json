@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build:css": "tailwindcss -i ./static/css/tailwind.css -o ./static/css/output.css --watch",
-    "build": "tailwindcss -i ./static/css/tailwind.css -o ./static/css/output.css --minify && mkdir -p public && cp -r static public/",
+    "bundle:css": "node bundle.js",
+    "build": "tailwindcss -i ./static/css/tailwind.css -o ./static/css/output.css --minify && node bundle.js && mkdir -p public && cp -r static public/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

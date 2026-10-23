@@ -49,14 +49,8 @@
     <noscript><link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.min.css') }}?v=1.13.1" /></noscript>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='assets/images/profile/favicon.svg') }}" />
 
-    <!-- Core Design System (Order matters: base → motion → components) -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}?v=9">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main/base.css') }}?v=3">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main/motion.css') }}?v=9">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main/cursor.css') }}?v=3">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main/loader.css') }}?v=3">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main/animations.css') }}?v=3">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main/text-effects.css') }}?v=3">
+    <!-- Consolidated Production Stylesheet (Eliminates render-blocking cascade) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.bundle.css') }}?v=1">
     {% if hero_bgs %}
     <!-- Preload first hero image for LCP — fetchpriority ensures it wins bandwidth race -->
     <link rel="preload" as="image" href="{{ hero_bgs[0] }}" fetchpriority="high">
