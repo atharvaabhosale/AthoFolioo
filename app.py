@@ -15,7 +15,12 @@ import uuid
 import traceback
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+import mimetypes
 import dns.resolver
+
+# Ensure proper font MIME types for self-hosted web fonts
+mimetypes.add_type('font/woff2', '.woff2')
+mimetypes.add_type('font/woff', '.woff')
 
 # Configure dnspython nameservers with public DNS (Google, Cloudflare) fallback
 # to prevent WinError 10054 when local router/ISP DNS drops or refuses SRV queries
