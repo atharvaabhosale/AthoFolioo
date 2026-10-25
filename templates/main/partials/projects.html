@@ -70,7 +70,7 @@
       data-index="{{ '%02d' | format(loop_idx) }}"
     >
 
-      <div class="flex flex-col gap-6" data-reveal>
+      <div class="proj-info-col flex flex-col gap-6 order-2 md:order-1" data-reveal>
 
         <div class="flex items-center gap-6">
           <span class="font-sans text-[0.7rem] font-bold tracking-[0.14em] text-white/20 tabular-nums">{{ '%02d' | format(loop_idx) }}</span>
@@ -107,7 +107,7 @@
         </div>
       </div>
 
-      <div class="relative" data-reveal="scale">
+      <div class="proj-media-col relative order-1 md:order-2" data-reveal="scale">
         <div class="proj-img-frame relative overflow-hidden bg-white/5 border border-white/10 cursor-pointer group/frame {% if is_featured %}rounded-2xl shadow-[0_0_0_1px_rgba(0,0,0,0.6),0_60px_120px_rgba(0,0,0,0.7),0_0_80px_rgba(90,120,255,0.06),inset_0_1px_0_rgba(255,255,255,0.06)]{% else %}rounded-xl shadow-[0_0_0_1px_rgba(0,0,0,0.5),0_40px_80px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.05)]{% endif %}" data-open-proj="{{ loop_idx - 1 }}" aria-label="View project image for {{ p.title }}">
           <div class="overflow-hidden aspect-[16/10] relative">
             <img src="{{ p.image_url | cloudinary_opt(900) }}" alt="{{ p.title }} preview" loading="{% if is_featured %}eager{% else %}lazy{% endif %}" decoding="async" width="900" height="562" class="proj-img w-full h-full object-cover object-top block scale-[1.04] transition-transform duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] brightness-[0.88] contrast-[1.05] group-hover/frame:scale-100 group-hover/frame:brightness-[0.92]">

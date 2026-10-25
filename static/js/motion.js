@@ -486,23 +486,68 @@ function runHeroSequence() {
   // "SYSTEMS" reveals up from clip
   tl.fromTo('#titleWord1',
     { y: '105%' },
-    { y: '0%', duration: M.dur.epic, ease: 'power4.out' },
+    {
+      y: '0%',
+      duration: M.dur.epic,
+      ease: 'power4.out',
+      onComplete: () => {
+        const clip = document.querySelector('#titleWord1')?.closest('.title-clip');
+        if (clip) {
+          clip.style.overflow = 'visible';
+          clip.classList.remove('overflow-hidden');
+          clip.classList.add('clip-revealed');
+        }
+      }
+    },
     0.2
   );
 
   // "THAT" reveals up
   tl.fromTo('#titleWord2',
     { y: '105%' },
-    { y: '0%', duration: M.dur.epic, ease: 'power4.out' },
+    {
+      y: '0%',
+      duration: M.dur.epic,
+      ease: 'power4.out',
+      onComplete: () => {
+        const clip = document.querySelector('#titleWord2')?.closest('.title-clip');
+        if (clip) {
+          clip.style.overflow = 'visible';
+          clip.classList.remove('overflow-hidden');
+          clip.classList.add('clip-revealed');
+        }
+      }
+    },
     0.42
   );
 
   // "THINK." reveals up with slight spring overshoot
   tl.fromTo('#titleWord3',
     { y: '105%' },
-    { y: '0%', duration: M.dur.epic, ease: 'back.out(1.2)' },
+    {
+      y: '0%',
+      duration: M.dur.epic,
+      ease: 'back.out(1.2)',
+      onComplete: () => {
+        const clip = document.querySelector('#titleWord3')?.closest('.title-clip');
+        if (clip) {
+          clip.style.overflow = 'visible';
+          clip.classList.remove('overflow-hidden');
+          clip.classList.add('clip-revealed');
+        }
+      }
+    },
     0.64
   );
+
+  // Release all title clips after hero entrance reveals
+  tl.call(() => {
+    document.querySelectorAll('.title-clip').forEach((clip) => {
+      clip.style.overflow = 'visible';
+      clip.classList.remove('overflow-hidden');
+      clip.classList.add('clip-revealed');
+    });
+  }, [], 1.1);
 
   // CTAs scale up
   tl.fromTo('#heroCtas',

@@ -197,6 +197,12 @@
             const tilt = (i % 2 === 0 ? 1 : -1) * 3.5;
 
             span.addEventListener('mouseenter', () => {
+              const clip = span.closest('.title-clip');
+              if (clip) {
+                clip.style.overflow = 'visible';
+                clip.classList.remove('overflow-hidden');
+                clip.classList.add('clip-revealed');
+              }
               gsap.killTweensOf(span);
               gsap.to(span, {
                 y: -10,
@@ -238,9 +244,27 @@
             duration: 0.45,
             delay: delay,
             ease: 'back.out(2)',
+            onComplete: () => {
+              const clip = word.closest('.title-clip');
+              if (clip) {
+                clip.style.overflow = 'visible';
+                clip.classList.remove('overflow-hidden');
+                clip.classList.add('clip-revealed');
+              }
+            },
           }
         );
       });
+
+      // Global safety fallback: release all hero title clips once entrance window passes
+      const releaseHeroClips = () => {
+        document.querySelectorAll('.title-clip').forEach((clip) => {
+          clip.style.overflow = 'visible';
+          clip.classList.remove('overflow-hidden');
+          clip.classList.add('clip-revealed');
+        });
+      };
+      setTimeout(releaseHeroClips, (sessionStorage.getItem('loaderSeen') ? 1.8 : 3.0) * 1000);
     })();
 
 

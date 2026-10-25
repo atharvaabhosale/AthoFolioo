@@ -150,3 +150,19 @@ a {
 ::-webkit-scrollbar {
   display: none;
 }
+
+/* ── Selected Work: Responsive Photo First, Description Under ── */
+@media (max-width: 767px) {
+  .proj-item {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .proj-item .proj-media-col {
+    order: 1 !important;
+    width: 100% !important;
+  }
+  .proj-item .proj-info-col {
+    order: 2 !important;
+    width: 100% !important;
+  }
+}
