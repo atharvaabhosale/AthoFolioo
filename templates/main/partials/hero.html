@@ -74,20 +74,20 @@
     <!-- ── Snowboarding Boy (Full Viewport Track Behind Buttons) ── -->
     <div class="hero-skater-track absolute bottom-[clamp(28px,4.5vh,48px)] left-0 w-full overflow-hidden pointer-events-none z-[8]" id="heroSkaterTrack">
       <div class="hero-skater-mover" id="heroSkaterMover">
-        <button type="button" class="hero-skater-btn" id="skaterBtn" aria-label="A boy snowboarding across the mountains. Click to hear his thoughts." aria-expanded="false" aria-controls="skaterThought">
+        <div class="hero-skater-wrap pointer-events-none select-none" id="skaterWrap">
           <!-- Thought Bubble: Visible during right half, fades at horizontal midpoint -->
-          <div class="hero-skater-thought" id="skaterThought" role="status" aria-live="polite">
+          <div class="hero-skater-thought pointer-events-none select-none" id="skaterThought" role="status" aria-live="polite">
             <span class="thought-text" id="skaterThoughtText">Hello there! 👋 How are you?</span>
             <span class="thought-bubble-dot" aria-hidden="true"></span>
           </div>
 
           <!-- Snowboarder Character Image & Subtle Snow Gliding Trail -->
-          <div class="hero-skater-figure">
-            <img src="{{ url_for('static', filename='assets/images/skater.webp') }}" alt="Boy snowboarding across the snowy mountain landscape" class="hero-skater-img" width="174" height="200" loading="eager" decoding="async" />
+          <div class="hero-skater-figure pointer-events-none select-none">
+            <img src="{{ url_for('static', filename='assets/images/skater.webp') }}" alt="Boy snowboarding across the snowy mountain landscape" class="hero-skater-img pointer-events-none select-none" width="174" height="200" loading="eager" decoding="async" />
             <div class="hero-skater-shadow" aria-hidden="true"></div>
             <div class="hero-skater-spray" aria-hidden="true"></div>
           </div>
-        </button>
+        </div>
       </div>
     </div>
   </div>

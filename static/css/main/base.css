@@ -154,8 +154,18 @@ a {
 /* ── Selected Work: Responsive Photo First, Description Under ── */
 @media (max-width: 767px) {
   .proj-item {
-    display: flex !important;
+    display: flex;
     flex-direction: column !important;
+  }
+  .hidden-proj-mobile,
+  .hidden-proj {
+    display: none !important;
+  }
+  .proj-item.show-proj {
+    display: flex !important;
+  }
+  div.show-proj {
+    display: block !important;
   }
   .proj-item .proj-media-col {
     order: 1 !important;

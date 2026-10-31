@@ -443,25 +443,21 @@
   }
 }
 
-/* Snowboarder Interactive Button */
-.hero-skater-btn {
+/* Snowboarder Ambient Character (Non-clickable) */
+.hero-skater-btn,
+.hero-skater-wrap {
   position: relative;
   background: transparent;
   border: none;
   padding: 0;
   margin: 0;
-  cursor: pointer;
+  cursor: default;
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   outline: none;
-  border-radius: 9999px;
-  transition: transform 0.2s ease;
-}
-
-.hero-skater-btn:focus-visible {
-  outline: 1.5px solid rgba(147, 197, 253, 0.6);
-  outline-offset: 4px;
+  user-select: none;
 }
 
 .hero-skater-figure {
@@ -485,9 +481,7 @@
   transition: filter 0.25s ease;
 }
 
-.hero-skater-btn:hover .hero-skater-img {
-  filter: drop-shadow(0 0 8px rgba(147, 197, 253, 0.7)) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
-}
+
 
 /* Natural Snowboarding/Gliding Body & Board Movement */
 @keyframes snowboarder-carve {

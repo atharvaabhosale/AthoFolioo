@@ -57,7 +57,7 @@
     {%- set is_even = loop.index is even %}
 
     <article
-      class="proj-item grid grid-cols-1 md:grid-cols-2 items-center relative md:even:[direction:rtl] [&>*]:[direction:ltr] [&.show-proj]:!grid {% if loop.index > 4 %}hidden-proj hidden opacity-0 translate-y-[30px] transition-all duration-[0.4s] ease-[cubic-bezier(0.16,1,0.3,1)]{% endif %} {% if loop.index > 3 %}hidden-proj-mobile max-md:hidden max-md:opacity-0 max-md:translate-y-[30px] transition-all duration-[0.4s] ease-[cubic-bezier(0.16,1,0.3,1)]{% endif %}"
+      class="proj-item grid grid-cols-1 md:grid-cols-2 items-center relative md:even:[direction:rtl] [&>*]:[direction:ltr] [&.show-proj]:!grid max-md:[&.show-proj]:!flex {% if loop.index > 4 %}hidden-proj hidden opacity-0 translate-y-[30px] transition-all duration-[0.4s] ease-[cubic-bezier(0.16,1,0.3,1)]{% endif %} {% if loop.index > 3 %}hidden-proj-mobile max-md:hidden max-md:opacity-0 max-md:translate-y-[30px] transition-all duration-[0.4s] ease-[cubic-bezier(0.16,1,0.3,1)]{% endif %}"
       style="padding-top: clamp(2rem, 3.5vw, 3.5rem); padding-bottom: clamp(2rem, 3.5vw, 3.5rem); gap: clamp(2rem, 4vw, 4.5rem);"
       data-proj-item
       data-id="{{ p.id }}"
@@ -144,7 +144,7 @@
   <div class="h-[clamp(2.5rem,4vw,3.5rem)]"></div>
 
   <!-- PROJECT CASE STUDY MODAL -->
-  <div class="proj-modal group/modal fixed inset-0 z-[2000] flex items-center justify-center p-4 sm:p-4 max-sm:p-0 max-sm:items-end pointer-events-none opacity-0 transition-opacity duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] [&.open]:opacity-100 [&.open]:pointer-events-auto" id="projModal" role="dialog" aria-modal="true" aria-labelledby="projModalTitle" aria-hidden="true">
+  <div class="proj-modal group/modal fixed inset-0 z-[100000] flex items-center justify-center p-4 sm:p-4 max-sm:p-0 max-sm:items-end pointer-events-none opacity-0 transition-opacity duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)] [&.open]:opacity-100 [&.open]:pointer-events-auto" id="projModal" role="dialog" aria-modal="true" aria-labelledby="projModalTitle" aria-hidden="true">
     <div class="proj-modal-backdrop absolute inset-0 bg-black/90 backdrop-blur-md cursor-pointer" id="projModalBackdrop" aria-hidden="true"></div>
     <div class="proj-modal-panel relative w-[min(92vw,820px)] max-sm:w-full max-h-[90vh] max-sm:max-h-[95vh] bg-[#0c0d12]/95 border border-white/10 rounded-[20px] max-sm:rounded-t-[20px] max-sm:rounded-b-none overflow-hidden flex flex-col shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_60px_rgba(90,120,255,0.06),inset_0_1px_0_rgba(255,255,255,0.06)] z-10 translate-y-6 max-sm:translate-y-10 scale-[0.97] max-sm:scale-100 transition-transform duration-[550ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-[.open]/modal:translate-y-0 group-[.open]/modal:scale-100" role="document">
       <button class="proj-modal-close absolute top-5 right-5 z-20 w-10 h-10 rounded-full border border-white/20 bg-black/50 text-white cursor-pointer flex items-center justify-center backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-black hover:border-white hover:rotate-90" id="projModalClose" aria-label="Close case study">
@@ -191,7 +191,7 @@
         if (isExpanded) {
           hiddenProjs.forEach((proj, index) => {
             if (proj.tagName.toLowerCase() === 'article') {
-              proj.style.display = 'grid';
+              proj.style.display = window.innerWidth < 768 ? 'flex' : 'grid';
             } else {
               proj.style.display = 'block';
             }

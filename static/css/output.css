@@ -964,6 +964,10 @@ a {
   z-index: -1;
 }
 
+.z-\[100000\] {
+  z-index: 100000;
+}
+
 .z-\[10000\] {
   z-index: 10000;
 }
@@ -982,10 +986,6 @@ a {
 
 .z-\[1\] {
   z-index: 1;
-}
-
-.z-\[2000\] {
-  z-index: 2000;
 }
 
 .z-\[20\] {
@@ -5532,6 +5532,12 @@ a {
 
 .\[\&\.show-proj\]\:\!grid.show-proj {
   display: grid !important;
+}
+
+@media not all and (min-width: 768px) {
+  .max-md\:\[\&\.show-proj\]\:\!flex.show-proj {
+    display: flex !important;
+  }
 }
 
 .\[\&\:\:-webkit-scrollbar\]\:hidden::-webkit-scrollbar {

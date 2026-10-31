@@ -86,7 +86,10 @@ function getLenis() {
     if (scrollContainer) scrollContainer.scrollTop = 0;
 
     modal.classList.add('open');
+    const header = document.getElementById('global-header');
+    header?.classList.add('nav-hidden');
     document.body.style.overflow = 'hidden';
+    if (typeof window.clearCursorStates === 'function') window.clearCursorStates();
     
     if (typeof getLenis === 'function') {
       getLenis()?.stop();
@@ -100,7 +103,10 @@ function getLenis() {
 
   function closeModal() {
     modal.classList.remove('open');
+    const header = document.getElementById('global-header');
+    header?.classList.remove('nav-hidden');
     document.body.style.overflow = '';
+    if (typeof window.clearCursorStates === 'function') window.clearCursorStates();
     
     if (typeof getLenis === 'function') {
       getLenis()?.start();
@@ -181,12 +187,16 @@ function getLenis() {
 
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+    const header = document.getElementById('global-header');
+    header?.classList.add('nav-hidden');
     getLenis()?.stop();
   }
 
   function closeModal() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
+    const header = document.getElementById('global-header');
+    header?.classList.remove('nav-hidden');
     getLenis()?.start();
   }
 
@@ -511,7 +521,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "Somewhere between lost and inspired.",
       "Well, this is a nice view!",
       "Keep exploring. Keep building.",
-      "See you at the summit! 🏂"
+      "See you at the summit! 🏂",
+      "Where are you going?? Mountoon?"
     ];
 
     let currentThoughtIndex = -1;
@@ -548,42 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
       applyNextThought();
     });
 
-    // Optional click interaction: temporarily highlights thought if visitor clicks character
-    if (skaterBtn && skaterThought) {
-      let clickTimer = null;
 
-      skaterBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (clickTimer) clearTimeout(clickTimer);
-
-        skaterThought.classList.add('thought-force-active');
-        skaterBtn.setAttribute('aria-expanded', 'true');
-
-        clickTimer = setTimeout(() => {
-          skaterThought.classList.remove('thought-force-active');
-          skaterBtn.setAttribute('aria-expanded', 'false');
-        }, 4000);
-      });
-
-      document.addEventListener('click', (e) => {
-        if (skaterThought.classList.contains('thought-force-active')) {
-          if (!skaterThought.contains(e.target) && !skaterBtn.contains(e.target)) {
-            skaterThought.classList.remove('thought-force-active');
-            skaterBtn.setAttribute('aria-expanded', 'false');
-            if (clickTimer) clearTimeout(clickTimer);
-          }
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && skaterThought.classList.contains('thought-force-active')) {
-          skaterThought.classList.remove('thought-force-active');
-          skaterBtn.setAttribute('aria-expanded', 'false');
-          skaterBtn.focus();
-          if (clickTimer) clearTimeout(clickTimer);
-        }
-      });
-    }
   }
 
   /* ── Footer Quick Links Smooth Scroll ─────────────────────── */
@@ -608,12 +584,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ── Hero CTA Buttons Smooth Scroll ───────────────────────── */
-  const heroCtas = document.querySelectorAll('.btn-hero-primary, .btn-hero-secondary');
+  const heroCtas = document.querySelectorAll('.btn-hero-primary, .btn-hero-secondary, #heroScrollCue');
   heroCtas.forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
       if (href && href.startsWith('#')) {
         e.preventDefault();
+        const header = document.getElementById('global-header');
+        header?.classList.add('nav-hidden');
+        if (typeof window.clearCursorStates === 'function') window.clearCursorStates();
         const target = document.querySelector(href);
         if (target) {
           const lenis = getLenis();

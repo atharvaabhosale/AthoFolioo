@@ -62,7 +62,7 @@
 </section>
 
 <!-- Certificate Modal -->
-<div id="certModal" class="cert-modal hidden fixed inset-0 z-[9999] bg-[rgba(0,0,0,0.85)] backdrop-blur-[8px] items-center justify-center p-[var(--space-4)]" onclick="closeCertModal(event)">
+<div id="certModal" class="cert-modal hidden fixed inset-0 z-[100000] bg-[rgba(0,0,0,0.85)] backdrop-blur-[8px] items-center justify-center p-[var(--space-4)]" onclick="closeCertModal(event)">
   <div class="cert-modal-content relative w-[90vw] max-w-[1000px] max-h-[90vh] flex justify-center items-center">
     <span class="cert-modal-close absolute -top-[40px] right-0 text-[rgba(255,255,255,0.7)] text-[35px] font-light cursor-pointer transition-colors duration-[0.3s] ease leading-none z-10 md:-top-[15px] md:-right-[45px] hover:text-white" onclick="closeCertModal(event)">&times;</span>
     <div class="cert-modal-body flex flex-col w-full bg-[rgba(20,20,25,0.95)] rounded-[var(--radius-2xl,24px)] border border-[rgba(255,255,255,0.1)] shadow-[0_30px_60px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)] overflow-hidden md:flex-row">
@@ -94,6 +94,8 @@
   function openCertModal(cert) {
     const modal = document.getElementById('certModal');
     if (!modal) return;
+    const header = document.getElementById('global-header');
+    header?.classList.add('nav-hidden');
     
     document.getElementById('certModalImg').src = cert.imageUrl || '';
     document.getElementById('certModalImg').alt = cert.title || 'Certificate';
@@ -137,6 +139,8 @@
     if (!event || event.target.id === 'certModal' || (event.target.classList && event.target.classList.contains('cert-modal-close')) || event.key === 'Escape') {
       modal.style.display = 'none';
       document.body.style.overflow = '';
+      const header = document.getElementById('global-header');
+      header?.classList.remove('nav-hidden');
       if (typeof getLenis === 'function') getLenis()?.start();
       else if (window.lenis) window.lenis.start();
     }

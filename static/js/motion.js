@@ -195,6 +195,10 @@ if (typeof gsap !== 'undefined') {
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      if (dot.style.opacity === '0') {
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+      }
     });
   }
 
@@ -239,7 +243,10 @@ if (typeof gsap !== 'undefined') {
 
   function clearCursorStates() {
     Object.values(states).forEach(([cls]) => document.body.classList.remove(cls));
+    document.body.classList.remove('cursor-click');
   }
+  window.clearCursorStates = clearCursorStates;
+  document.addEventListener('scroll', clearCursorStates, { capture: true, passive: true });
 
   Object.entries(states).forEach(([, [cls, selectors]]) => {
     const selector = selectors.join(', ');
@@ -301,7 +308,12 @@ if (typeof gsap !== 'undefined') {
         if (delta > 0 && scroll > HIDE_THRESHOLD) {
           header?.classList.add('nav-hidden');
         } else if (delta < 0) {
-          header?.classList.remove('nav-hidden');
+          const isModalOpen = document.getElementById('projModal')?.classList.contains('open') ||
+                              document.getElementById('certModal')?.style.display === 'flex' ||
+                              document.getElementById('achModal')?.classList.contains('open');
+          if (!isModalOpen) {
+            header?.classList.remove('nav-hidden');
+          }
         }
         lastScrollY = scroll;
         ticking = false;
@@ -410,6 +422,7 @@ if (typeof gsap !== 'undefined') {
       const target = document.querySelector(href);
       
       closeMenu();
+      header?.classList.add('nav-hidden');
       
       if (target) {
         // Scroll immediately while menu closes

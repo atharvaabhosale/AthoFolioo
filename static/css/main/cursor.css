@@ -17,7 +17,7 @@
   background: #ffffff;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 99999;
+  z-index: 2147483647 !important;
   will-change: transform;
   /* translate is set via JS transform directly for instant snap */
   mix-blend-mode: difference;
@@ -38,7 +38,7 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 99998;
+  z-index: 2147483646 !important;
   will-change: transform;
   /* JS lerps this behind the dot */
   transition:
@@ -69,16 +69,16 @@
 
 /* ── Cursor State: Link / Button Hover ──────────────────────── */
 body.cursor-hover #cursor-dot {
-  width: 0;
-  height: 0;
-  opacity: 0;
+  width: 4px;
+  height: 4px;
+  opacity: 0.9;
 }
 
 body.cursor-hover #cursor-ring {
-  width: 56px;
-  height: 56px;
+  width: 54px;
+  height: 54px;
   border-color: rgba(255, 255, 255, 0.9);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* ── Cursor State: Project Card Hover ───────────────────────── */
@@ -115,8 +115,8 @@ body.cursor-image #cursor-ring {
 
 /* ── Cursor State: Click / Press ────────────────────────────── */
 body.cursor-click #cursor-dot {
-  transform: scale(0) !important;
-  opacity: 0;
+  transform: scale(0.6) !important;
+  opacity: 0.9;
 }
 
 body.cursor-click #cursor-ring {
