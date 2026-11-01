@@ -9,28 +9,38 @@
 /* ── Motion Tokens ──────────────────────────────────────────── */
 :root {
   /* Duration Scale — Named by feel, not milliseconds */
-  --dur-instant:  0.06s;   /* Micro: button press, click flash */
-  --dur-fast:     0.18s;   /* Quick: hover state changes */
-  --dur-normal:   0.42s;   /* Default: UI transitions */
-  --dur-slow:     0.85s;   /* Reveals: sections, panels */
-  --dur-epic:     1.6s;    /* Cinematic: page load, hero */
+  --dur-instant: 0.06s;
+  /* Micro: button press, click flash */
+  --dur-fast: 0.18s;
+  /* Quick: hover state changes */
+  --dur-normal: 0.42s;
+  /* Default: UI transitions */
+  --dur-slow: 0.85s;
+  /* Reveals: sections, panels */
+  --dur-epic: 1.6s;
+  /* Cinematic: page load, hero */
 
   /* Easing Scale — One family, four roles */
-  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);      /* Primary: all enters */
-  --ease-in:      cubic-bezier(0.7, 0, 0.84, 0);       /* Exits only */
-  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);   /* Elastic: lifts, bounces */
-  --ease-smooth:  cubic-bezier(0.25, 0.46, 0.45, 0.94);/* Scroll parallax, glides */
-  --ease-linear:  linear;                               /* Scrubs, continuous loops */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Primary: all enters */
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  /* Exits only */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Elastic: lifts, bounces */
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Scroll parallax, glides */
+  --ease-linear: linear;
+  /* Scrubs, continuous loops */
 
   /* Stagger — one value, used consistently */
-  --stagger:      0.08s;
-  --stagger-sm:   0.04s;
-  --stagger-lg:   0.14s;
+  --stagger: 0.08s;
+  --stagger-sm: 0.04s;
+  --stagger-lg: 0.14s;
 
   /* Overwrite base.css transition shorthands with motion tokens */
-  --transition-fast:   var(--dur-fast) var(--ease-out);
+  --transition-fast: var(--dur-fast) var(--ease-out);
   --transition-normal: var(--dur-normal) var(--ease-out);
-  --transition-slow:   var(--dur-slow) var(--ease-out);
+  --transition-slow: var(--dur-slow) var(--ease-out);
 }
 
 
@@ -38,86 +48,178 @@
 
 /* Reveal upward from clipped container */
 @keyframes reveal-up {
-  from { transform: translateY(102%); }
-  to   { transform: translateY(0); }
+  from {
+    transform: translateY(102%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }
 
 /* Fade in with upward drift */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Fade in only */
 @keyframes fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* Blur to sharp reveal */
 @keyframes blur-reveal {
-  from { opacity: 0; filter: blur(12px); transform: translateY(16px); }
-  to   { opacity: 1; filter: blur(0);    transform: translateY(0); }
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
 }
 
 /* Scale reveal (for images, cards) */
 @keyframes scale-reveal {
-  from { opacity: 0; transform: scale(1.06); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Continuous ambient pulse */
 @keyframes ambient-pulse {
-  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-  50%       { opacity: 0.8; transform: translateX(-50%) scale(1.08); }
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateX(-50%) scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(1.08);
+  }
 }
 
 /* Loader bar sweep */
 @keyframes loader-sweep {
-  from { transform: scaleX(0); transform-origin: left; }
-  to   { transform: scaleX(1); transform-origin: left; }
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }
 
 /* Subtle float (scroll indicator) */
 @keyframes float-bob {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(6px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
 }
 
 /* Shimmer for skeleton loaders */
 @keyframes shimmer {
-  from { background-position: -400px 0; }
-  to   { background-position: 400px 0; }
+  from {
+    background-position: -400px 0;
+  }
+
+  to {
+    background-position: 400px 0;
+  }
 }
 
 /* Dot pulse (journey timeline nodes) */
 @keyframes dot-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
-  50%       { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+  }
 }
 
 /* Marquee scroll — smooth infinite */
 @keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Link underline sweep */
 @keyframes underline-sweep {
-  from { transform: scaleX(0); transform-origin: left; }
-  to   { transform: scaleX(1); transform-origin: left; }
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }
 
 /* Nav link stagger in */
 @keyframes nav-link-in {
-  from { opacity: 0; transform: translateX(-32px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Success checkmark draw */
 @keyframes check-draw {
-  from { stroke-dashoffset: 30; }
-  to   { stroke-dashoffset: 0; }
+  from {
+    stroke-dashoffset: 30;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 
@@ -126,14 +228,16 @@
 
 .clip-wrap {
   overflow: hidden;
-  display: block; /* Ensure block context for child transform */
+  display: block;
+  /* Ensure block context for child transform */
 }
 
 /* Lines of text get this — clips the upward reveal */
 .line-wrap {
   overflow: hidden;
   display: block;
-  padding-bottom: 0.08em; /* Prevent descender clips */
+  padding-bottom: 0.08em;
+  /* Prevent descender clips */
 }
 
 
@@ -170,6 +274,7 @@
 [data-reveal="line"] {
   /* Parent wraps children */
 }
+
 [data-reveal="line"] .line-inner {
   display: block;
   transform: translateY(104%);
@@ -329,12 +434,10 @@
 /* ── Skeleton Loader ─────────────────────────────────────────── */
 
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0.04) 0%,
-    rgba(255,255,255,0.10) 50%,
-    rgba(255,255,255,0.04) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.10) 50%,
+      rgba(255, 255, 255, 0.04) 100%);
   background-size: 800px 100%;
   animation: shimmer 1.6s var(--ease-linear) infinite;
   border-radius: var(--radius-md);
@@ -414,7 +517,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  pointer-events: auto;
+  pointer-events: none;
   will-change: transform;
   animation: skater-journey-rtl 28s linear infinite;
 }
@@ -425,18 +528,23 @@
     transform: translate3d(calc(100vw + 90px), 0, 0);
     opacity: 0;
   }
+
   1.5% {
     opacity: 0;
   }
+
   5% {
     opacity: 1;
   }
+
   92% {
     opacity: 1;
   }
+
   97.5% {
     opacity: 0;
   }
+
   100% {
     transform: translate3d(-110px, 0, 0);
     opacity: 0;
@@ -488,9 +596,11 @@
   0% {
     transform: translateY(0px) rotate(-1.5deg);
   }
+
   50% {
     transform: translateY(-1.5px) rotate(-3.5deg);
   }
+
   100% {
     transform: translateY(0.5px) rotate(-2deg);
   }
@@ -529,6 +639,7 @@
     opacity: 0.25;
     transform: scale(0.8) translateX(0);
   }
+
   100% {
     opacity: 0.65;
     transform: scale(1.15) translateX(2px);
@@ -536,7 +647,7 @@
 }
 
 /* ── Minimal Subtle Thought Bubble ──────────────────────────── */
-/* Appears during right half of hero; fades smoothly at midpoint (46%) */
+/* Appears on right half, stays past midpoint, fades smoothly nearby buttons (~67%) */
 .hero-skater-thought {
   position: absolute;
   bottom: calc(100% + 7px);
@@ -555,31 +666,37 @@
     transform: translateX(-50%) translateY(4px) scale(0.88);
     visibility: hidden;
   }
-  2.5% {
+
+  2% {
     opacity: 0;
     transform: translateX(-50%) translateY(4px) scale(0.88);
     visibility: visible;
   }
-  5.5% {
+
+  5% {
     /* Entering right side of screen: smoothly reveal */
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
     visibility: visible;
   }
-  36% {
-    /* Travelling across right half: comfortably readable */
+
+  55% {
+    /* Travelling across right half, past midpoint, towards buttons */
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
     visibility: visible;
   }
-  45% {
-    /* Reaching horizontal midpoint (50vw): smoothly fade out */
+
+  60% {
+    /* Smoothly fade out as skater arrives nearby the hero buttons */
     opacity: 0;
     transform: translateX(-50%) translateY(-3px) scale(0.92);
     visibility: visible;
   }
-  47%, 100% {
-    /* Left half of screen: completely hidden */
+
+  65%,
+  100% {
+    /* Near buttons and exiting left: completely hidden */
     opacity: 0;
     transform: translateX(-50%) translateY(4px) scale(0.88);
     visibility: hidden;
@@ -633,24 +750,30 @@
     bottom: 16px;
     height: 70px;
   }
+
   .hero-skater-img {
     height: 32px;
   }
+
   .hero-skater-thought {
     bottom: calc(100% + 5px);
   }
+
   .hero-skater-thought .thought-text {
     font-size: 0.62rem;
     padding: 3px 9px;
   }
+
   .hero-countdown-minimal {
     bottom: 16px;
     right: 5vw;
   }
+
   .hero-countdown-label {
     font-size: 0.54rem;
     letter-spacing: 0.16em;
   }
+
   .hero-countdown-track {
     width: 85px;
   }
@@ -658,6 +781,7 @@
 
 /* ── Reduced Motion Overrides ────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
+
   [data-reveal],
   [data-reveal="blur"],
   [data-reveal="scale"],

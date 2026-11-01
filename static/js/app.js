@@ -510,19 +510,20 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Snowboarding Boy: Rotating Thoughts On Every Journey ──── */
   if (heroSkaterMover && skaterThoughtText) {
     const THOUGHT_MESSAGES = [
-      "Hello there! 👋 How are you?",
+      "Oh, look who's here! 👀",
       "Enjoying the view? 🏔️",
-      "One step at a time.",
+      "You lost or just curious? 😂",
       "Still figuring things out...",
-      "Keep going, you're getting there.",
+      "Blink twice if you're impressed.😁",
       "Just passing through! 👋",
-      "Big dreams, small steps.",
+      "Mom said I should greet visitors.",
       "Hope you're having a good day!",
       "Somewhere between lost and inspired.",
       "Well, this is a nice view!",
-      "Keep exploring. Keep building.",
+      "Wait, let me fix my hair.",
       "See you at the summit! 🏂",
-      "Where are you going?? Mountoon?"
+      "Where are you going?? Mountoon?😁",
+      "Don't worry, just skating around.🛹" 
     ];
 
     let currentThoughtIndex = -1;
@@ -558,8 +559,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target !== heroSkaterMover || e.animationName !== 'skater-journey-rtl') return;
       applyNextThought();
     });
-
-
   }
 
   /* ── Footer Quick Links Smooth Scroll ─────────────────────── */

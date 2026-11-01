@@ -82,10 +82,10 @@
           </div>
 
           <!-- Snowboarder Character Image & Subtle Snow Gliding Trail -->
-          <div class="hero-skater-figure pointer-events-none select-none">
-            <img src="{{ url_for('static', filename='assets/images/skater.webp') }}" alt="Boy snowboarding across the snowy mountain landscape" class="hero-skater-img pointer-events-none select-none" width="174" height="200" loading="eager" decoding="async" />
-            <div class="hero-skater-shadow" aria-hidden="true"></div>
-            <div class="hero-skater-spray" aria-hidden="true"></div>
+          <div class="hero-skater-figure pointer-events-none select-none" id="skaterFigure">
+            <img src="{{ url_for('static', filename='assets/images/skater.webp') }}" alt="Boy snowboarding across the snowy mountain landscape" class="hero-skater-img pointer-events-none select-none" id="skaterImg" width="174" height="200" loading="eager" decoding="async" />
+            <div class="hero-skater-shadow" id="skaterShadow" aria-hidden="true"></div>
+            <div class="hero-skater-spray" id="skaterSpray" aria-hidden="true"></div>
           </div>
         </div>
       </div>
