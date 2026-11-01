@@ -1,42 +1,43 @@
 {% extends "admin/base.html" %}
 {% block title %}| Manage Wallpapers{% endblock %}
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_forms.css') }}">
-{% endblock %}
+
 {% block content %}
-<section class="admin-form-section">
-  <div class="admin-header">
-    <h2>Manage Wallpapers</h2>
-    <a href="{{ url_for('admin_dashboard') }}" class="back-btn">Back</a>
+<section class="bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 md:p-8 mb-8 shadow-[0_6px_24px_rgba(0,0,0,0.8)]">
+  <div class="flex justify-between items-center mb-6 pb-3 border-b border-white/[0.08]">
+    <h2 class="text-lg md:text-xl font-semibold text-white font-display">Manage Wallpapers</h2>
+    <a href="{{ url_for('admin_dashboard') }}" class="inline-flex items-center px-3.5 py-1.5 rounded-lg border border-white/[0.08] text-white/60 hover:text-white hover:border-white/30 text-xs font-medium no-underline transition-all">Back</a>
   </div>
   
   <form
     action="{{ url_for('add_wallpaper') }}"
     method="POST"
     enctype="multipart/form-data"
-    class="admin-form">
+    class="flex flex-col gap-4">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <input type="file" name="image" accept="image/*" required>
-    <button type="submit">Upload Wallpaper</button>
+    <input type="file" name="image" accept="image/*" required
+      class="w-full px-3 py-2 rounded-lg border border-white/[0.08] bg-[#030303] text-white/60 text-sm outline-none file:mr-3 file:py-1.5 file:px-3.5 file:rounded-md file:border file:border-white/10 file:bg-white/10 file:text-white file:text-xs file:font-medium file:cursor-pointer hover:file:bg-white/20 transition-all">
+    <button type="submit"
+      class="self-start px-6 py-2.5 rounded-lg border-0 cursor-pointer font-semibold text-sm bg-gradient-to-r from-white to-[#a0a0a0] text-black transition-all hover:opacity-90 hover:-translate-y-0.5 max-sm:w-full max-sm:self-stretch">Upload Wallpaper</button>
   </form>
 </section>
 
-<section class="admin-list-section">
-  <h2>Current Wallpapers</h2>
+<section class="bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 md:p-8 shadow-[0_6px_24px_rgba(0,0,0,0.8)]">
+  <h2 class="text-lg md:text-xl font-semibold mb-6 pb-3 border-b border-white/[0.08] text-white font-display">Current Wallpapers</h2>
   {% for wp in wallpapers %}
-  <div class="admin-list-item" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-    <div style="position: relative;">
-      <img src="{{ wp.image_url }}" alt="Wallpaper" style="width: 150px; height: auto; border-radius: 4px; {% if wp.active == False %}opacity: 0.5; filter: grayscale(100%);{% endif %}">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 border-b border-white/[0.08] last:border-b-0">
+    <div class="relative w-fit">
+      <img src="{{ wp.image_url }}" alt="Wallpaper"
+        class="w-[150px] h-auto rounded-lg object-cover border border-white/10 {% if wp.active == False %}opacity-50 grayscale{% endif %}">
       {% if wp.active != False %}
-      <span style="position: absolute; top: -8px; right: -8px; background: #10b981; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; font-weight: bold;">Active</span>
+      <span class="absolute -top-2 -right-2 bg-emerald-500 text-white text-[0.7rem] px-2 py-0.5 rounded-full font-bold shadow-sm">Active</span>
       {% else %}
-      <span style="position: absolute; top: -8px; right: -8px; background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; font-weight: bold;">Inactive</span>
+      <span class="absolute -top-2 -right-2 bg-rose-500 text-white text-[0.7rem] px-2 py-0.5 rounded-full font-bold shadow-sm">Inactive</span>
       {% endif %}
     </div>
-    <div class="admin-actions" style="display: flex; gap: 0.5rem;">
+    <div class="flex items-center gap-2">
       <form method="POST" action="{{ url_for('toggle_wallpaper', wp_id=wp._id) }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="primary-btn" style="background: var(--color-primary-dark); padding: 0.5rem 1rem;">
+        <button class="inline-flex items-center px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-medium border border-white/10 transition-all cursor-pointer">
           {% if wp.active != False %}Deactivate{% else %}Activate{% endif %}
         </button>
       </form>
@@ -44,12 +45,12 @@
         action="{{ url_for('delete_wallpaper', wp_id=wp._id) }}"
         onsubmit="return confirm('Delete this wallpaper?');">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="danger-btn">Delete</button>
+        <button class="inline-flex items-center px-3.5 py-1.5 rounded-lg border border-rose-500/30 bg-rose-500/[0.08] text-rose-400 text-xs font-medium cursor-pointer hover:bg-rose-500/20 transition-all">Delete</button>
       </form>
     </div>
   </div>
   {% else %}
-  <p>No wallpapers found.</p>
+  <p class="text-white/50 italic text-sm m-0">No wallpapers found.</p>
   {% endfor %}
 </section>
 {% endblock %}

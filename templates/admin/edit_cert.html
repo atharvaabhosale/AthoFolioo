@@ -1,73 +1,76 @@
 {% extends "admin/base.html" %}
 {% block title %}| Edit Certificate{% endblock %}
-{% block head %}
-<link rel="stylesheet"
-  href="{{ url_for('static', filename='css/admin/edit_project.css') }}">
-{% endblock %}
+
 {% block content %}
-<section class="admin-section admin-edit-project">
+<section class="max-w-[720px] mx-auto">
 
   <!-- Header -->
-  <div class="admin-header">
-    <h2>Edit Certificate</h2>
-    <a href="{{ url_for('add_cert_page') }}" class="back-btn">Back</a>
+  <div class="flex justify-between items-center mb-6 gap-4 pb-3 border-b border-white/[0.08]">
+    <h2 class="text-lg md:text-xl font-bold text-white font-display">Edit Certificate</h2>
+    <a href="{{ url_for('add_cert_page') }}" class="inline-flex items-center px-3.5 py-1.5 rounded-lg border border-white/[0.08] text-white/60 hover:text-white hover:border-white/30 text-xs font-medium no-underline transition-all">Back</a>
   </div>
 
   <!-- Form Card -->
-  <div class="admin-card">
-    <form method="POST" class="admin-form" enctype="multipart/form-data">
+  <div class="bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 md:p-8 shadow-[0_6px_24px_rgba(0,0,0,0.8)]">
+    <form method="POST" class="flex flex-col gap-4" enctype="multipart/form-data">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
       <!-- Title -->
-      <div class="form-group">
-        <label>Certificate Title</label>
+      <div class="flex flex-col gap-1.5">
+        <label class="text-xs font-semibold text-white/50 uppercase tracking-wider font-display">Certificate Title</label>
         <input
           type="text"
           name="title"
           value="{{ cert.title }}"
-          required>
+          required
+          class="w-full px-3.5 py-2.5 rounded-lg border border-white/[0.08] bg-[#030303] text-white text-sm outline-none transition-all placeholder:text-white/40 focus:border-white focus:ring-2 focus:ring-white/10">
       </div>
 
       <!-- Issuer -->
-      <div class="form-group">
-        <label>Issued By</label>
+      <div class="flex flex-col gap-1.5">
+        <label class="text-xs font-semibold text-white/50 uppercase tracking-wider font-display">Issued By</label>
         <input
           type="text"
           name="issuer"
           value="{{ cert.issuer }}"
-          required>
+          required
+          class="w-full px-3.5 py-2.5 rounded-lg border border-white/[0.08] bg-[#030303] text-white text-sm outline-none transition-all placeholder:text-white/40 focus:border-white focus:ring-2 focus:ring-white/10">
       </div>
 
-      <div class="form-group">
-        <label>Display Priority</label>
+      <div class="flex flex-col gap-1.5">
+        <label class="text-xs font-semibold text-white/50 uppercase tracking-wider font-display">Display Priority</label>
         <input
           type="number"
           name="priority"
           value="{{ cert.priority if cert.priority is not none else 100 }}"
           placeholder="Priority (e.g., 1, 2, 3...)"
           min="1"
-          required>
+          required
+          class="w-full px-3.5 py-2.5 rounded-lg border border-white/[0.08] bg-[#030303] text-white text-sm outline-none transition-all placeholder:text-white/40 focus:border-white focus:ring-2 focus:ring-white/10">
       </div>
 
-      <div class="form-group">
-        <label>Certificate URL</label>
+      <div class="flex flex-col gap-1.5">
+        <label class="text-xs font-semibold text-white/50 uppercase tracking-wider font-display">Certificate URL</label>
         <input
           type="url"
           name="certificate_url"
-          value="{{ cert.certificate_url or '' }}">
+          value="{{ cert.certificate_url or '' }}"
+          class="w-full px-3.5 py-2.5 rounded-lg border border-white/[0.08] bg-[#030303] text-white text-sm outline-none transition-all placeholder:text-white/40 focus:border-white focus:ring-2 focus:ring-white/10">
       </div>
       
-      <div class="form-group">
-        <label>Update Photo (Leave blank to keep current)</label>
+      <div class="flex flex-col gap-1.5">
+        <label class="text-xs font-semibold text-white/50 uppercase tracking-wider font-display">Update Photo (Leave blank to keep current)</label>
         <input
           type="file"
           name="image"
-          accept="image/*">
+          accept="image/*"
+          class="w-full px-3 py-2 rounded-lg border border-white/[0.08] bg-[#030303] text-white/60 text-sm outline-none file:mr-3 file:py-1.5 file:px-3.5 file:rounded-md file:border file:border-white/10 file:bg-white/10 file:text-white file:text-xs file:font-medium file:cursor-pointer hover:file:bg-white/20 transition-all">
       </div>
 
       <!-- Submit -->
-      <div class="form-actions">
-        <button type="submit" class="primary-btn">
+      <div class="pt-2">
+        <button type="submit"
+          class="w-full sm:w-auto px-6 py-2.5 rounded-lg border-0 cursor-pointer font-semibold text-sm bg-gradient-to-r from-white to-[#a0a0a0] text-black transition-all hover:opacity-90 hover:-translate-y-0.5">
           Update Certificate
         </button>
       </div>

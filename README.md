@@ -42,18 +42,19 @@ This website showcases my **projects, skills, resume, achievements, and contact 
 │   ├── 📁 assets
 │   │   ├── 📁 images
 │   │   │   ├── 📁 profile
-│   │   │   └── 📁 skills
+│   │   │   └── 🖼️ mountain wallpapers & character assets
 │   │   └── 📕 resume.pdf
 │   ├── 📁 css
-│   │   ├── 🎨 admin_forms.css
-│   │   ├── 🎨 base.css
-│   │   ├── 🎨 comments.css
-│   │   ├── 🎨 dashboard.css
-│   │   ├── 🎨 login.css
-│   │   └── 🎨 styles.css
-│   └── 📁 js
-│       ├── 📄 admin.js
-│       └── 📄 app.js
+│   │   ├── 📁 main (core design system: base, motion, cursor, loader, etc.)
+│   │   ├── 🎨 tailwind.css (source Tailwind)
+│   │   └── 🎨 output.css (compiled production Tailwind)
+│   ├── 📁 js
+│   │   ├── 📄 app.js (portfolio interactions & data)
+│   │   ├── 📄 motion.js (GSAP & Lenis smooth scroll motion engine)
+│   │   ├── 📄 text-effects.js (cinematic typography effects)
+│   │   └── 📄 theme.js (theme state controller)
+│   └── 📁 vendor
+│       └── 📁 bootstrap-icons
 ├── 📁 templates
 │   ├── 📁 admin
 │   │   ├── 🌐 add_cert.html

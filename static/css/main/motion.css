@@ -272,7 +272,7 @@
 
 /* Line reveals: child spans start offset, clip-wrap on parent */
 [data-reveal="line"] {
-  /* Parent wraps children */
+  overflow: hidden;
 }
 
 [data-reveal="line"] .line-inner {

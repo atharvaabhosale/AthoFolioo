@@ -1,55 +1,59 @@
 {% extends "admin/base.html" %}
 {% block title %} | Certificates{% endblock %}
 
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin_forms.css') }}">
-{% endblock %}
-
 {% block content %}
-<section id="add-certificate" class="admin-form-section">
-    <h2>Add New Certificate</h2>
+<section id="add-certificate" class="bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 md:p-8 mb-8 shadow-[0_6px_24px_rgba(0,0,0,0.8)]">
+    <h2 class="text-lg md:text-xl font-semibold mb-6 pb-3 border-b border-white/[0.08] text-white font-display">Add New Certificate</h2>
     <form
         action="{{ url_for('add_certificate') }}"
         method="POST"
         enctype="multipart/form-data"
-        class="admin-form">
+        class="flex flex-col gap-4">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input
             type="text"
             name="title"
             placeholder="Certificate Title"
-            required>
+            required
+            class="w-full px-3.5 py-2.5 rounded-lg border border-white/[0.08] bg-[#030303] text-white text-sm outline-none transition-all placeholder:text-white/40 focus:border-white focus:ring-2 focus:ring-white/10">
         <input
             type="text"
             name="issuer"
             placeholder="Issued By"
-            required>
-        <input type="number" name="priority" placeholder="Display Priority (e.g., 1, 2, 3...)" value="100" min="1" required>
+            required
+            class="w-full px-3.5 py-2.5 rounded-lg border border-white/[0.08] bg-[#030303] text-white text-sm outline-none transition-all placeholder:text-white/40 focus:border-white focus:ring-2 focus:ring-white/10">
+        <input type="number" name="priority" placeholder="Display Priority (e.g., 1, 2, 3...)" value="100" min="1" required
+            class="w-full px-3.5 py-2.5 rounded-lg border border-white/[0.08] bg-[#030303] text-white text-sm outline-none transition-all placeholder:text-white/40 focus:border-white focus:ring-2 focus:ring-white/10">
         <input
             type="url"
             name="certificate_url"
-            placeholder="Certificate Link URL (optional)">
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Add Certificate</button>
+            placeholder="Certificate Link URL (optional)"
+            class="w-full px-3.5 py-2.5 rounded-lg border border-white/[0.08] bg-[#030303] text-white text-sm outline-none transition-all placeholder:text-white/40 focus:border-white focus:ring-2 focus:ring-white/10">
+        <input type="file" name="image" accept="image/*" required
+            class="w-full px-3 py-2 rounded-lg border border-white/[0.08] bg-[#030303] text-white/60 text-sm outline-none file:mr-3 file:py-1.5 file:px-3.5 file:rounded-md file:border file:border-white/10 file:bg-white/10 file:text-white file:text-xs file:font-medium file:cursor-pointer hover:file:bg-white/20 transition-all">
+        <button type="submit"
+            class="self-start px-6 py-2.5 rounded-lg border-0 cursor-pointer font-semibold text-sm bg-gradient-to-r from-white to-[#a0a0a0] text-black transition-all hover:opacity-90 hover:-translate-y-0.5 max-sm:w-full max-sm:self-stretch">Add Certificate</button>
     </form>
 </section>
-<section class="admin-list-section">
-    <h2>Certificates</h2>
+
+<section class="bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 md:p-8 shadow-[0_6px_24px_rgba(0,0,0,0.8)]">
+    <h2 class="text-lg md:text-xl font-semibold mb-6 pb-3 border-b border-white/[0.08] text-white font-display">Certificates</h2>
     {% for cert in certificates %}
-    <div class="admin-list-item">
-        <strong>{{ cert.title }}</strong>
-        <div class="admin-actions">
-            <a href="{{ url_for('edit_certificate', cert_id=cert._id) }}" class="btn">Edit</a>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-3.5 border-b border-white/[0.08] last:border-b-0">
+        <strong class="text-[0.95rem] font-medium text-white truncate min-w-0 flex-1">{{ cert.title }}</strong>
+        <div class="flex items-center gap-2 shrink-0">
+            <a href="{{ url_for('edit_certificate', cert_id=cert._id) }}"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-white/[0.08] bg-white/[0.08] text-white text-xs font-medium no-underline hover:bg-white/15 hover:-translate-y-0.5 transition-all">Edit</a>
             <form method="POST"
                 action="{{ url_for('delete_certificate', cert_id=cert._id) }}"
                 onsubmit="return confirm('Delete this certificate?');">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <button class="danger-btn">Delete</button>
+                <button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-rose-500/30 bg-rose-500/[0.08] text-rose-400 text-xs font-medium cursor-pointer hover:bg-rose-500/20 hover:-translate-y-0.5 transition-all">Delete</button>
             </form>
         </div>
     </div>
     {% else %}
-    <p>No certificates found.</p>
+    <p class="text-white/50 italic text-sm m-0">No certificates found.</p>
     {% endfor %}
 </section>
 {% endblock %}

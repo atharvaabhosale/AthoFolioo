@@ -2,50 +2,51 @@
 
 {% block title %}| Dashboard{% endblock %}
 
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/dashboard.css') }}">
-{% endblock %}
-
 {% block content %}
-<section class="dashboard">
-  <div class="dashboard-header">
-    <h2>Welcome, Admin 👋</h2>
-    <p>Manage your portfolio content from one place</p>
+<section class="flex flex-col gap-7">
+  <div class="border-b border-white/[0.08] pb-4">
+    <h2 class="text-2xl md:text-[1.6rem] font-bold tracking-tight text-white font-display">Welcome, Admin 👋</h2>
+    <p class="text-sm text-white/60 mt-1">Manage your portfolio content from one place</p>
   </div>
 
-  <div class="dashboard-grid">
-    <a href="{{ url_for('add_project_page') }}" class="dashboard-card">
-      <h3>➕ Add Project</h3>
-      <p>Create and publish a new portfolio project</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <a href="{{ url_for('add_project_page') }}" class="group relative overflow-hidden bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 no-underline text-white shadow-[0_4px_20px_rgba(0,0,0,0.8)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.8)] hover:border-white/25">
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-white to-[#888888] opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+      <h3 class="text-base font-semibold mb-1.5 text-white font-display">➕ Add Project</h3>
+      <p class="text-xs md:text-[0.84rem] text-white/60 leading-relaxed m-0">Create and publish a new portfolio project</p>
     </a>
 
-    <a href="{{ url_for('add_cert_page') }}" class="dashboard-card">
-      <h3>📜 Add Certificate</h3>
-      <p>Upload and manage certifications</p>
+    <a href="{{ url_for('add_cert_page') }}" class="group relative overflow-hidden bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 no-underline text-white shadow-[0_4px_20px_rgba(0,0,0,0.8)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.8)] hover:border-white/25">
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-white to-[#888888] opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+      <h3 class="text-base font-semibold mb-1.5 text-white font-display">📜 Add Certificate</h3>
+      <p class="text-xs md:text-[0.84rem] text-white/60 leading-relaxed m-0">Upload and manage certifications</p>
     </a>
 
-    <a href="{{ url_for('admin_comments') }}" class="dashboard-card">
-      <h3>💬 Comments</h3>
-      <p>Review user feedback and messages</p>
+    <a href="{{ url_for('admin_comments') }}" class="group relative overflow-hidden bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 no-underline text-white shadow-[0_4px_20px_rgba(0,0,0,0.8)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.8)] hover:border-white/25">
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-white to-[#888888] opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+      <h3 class="text-base font-semibold mb-1.5 text-white font-display">💬 Comments</h3>
+      <p class="text-xs md:text-[0.84rem] text-white/60 leading-relaxed m-0">Review user feedback and messages</p>
     </a>
 
-    <a href="{{ url_for('admin_wallpapers') }}" class="dashboard-card">
-      <h3>🖼️ Wallpapers</h3>
-      <p>Manage homepage background images</p>
+    <a href="{{ url_for('admin_wallpapers') }}" class="group relative overflow-hidden bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 no-underline text-white shadow-[0_4px_20px_rgba(0,0,0,0.8)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.8)] hover:border-white/25">
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-white to-[#888888] opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+      <h3 class="text-base font-semibold mb-1.5 text-white font-display">🖼️ Wallpapers</h3>
+      <p class="text-xs md:text-[0.84rem] text-white/60 leading-relaxed m-0">Manage homepage background images</p>
     </a>
 
-    <a href="{{ url_for('admin_resume') }}" class="dashboard-card">
-      <h3>📄 Resume</h3>
-      <p>Update your resume file</p>
+    <a href="{{ url_for('admin_resume') }}" class="group relative overflow-hidden bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 no-underline text-white shadow-[0_4px_20px_rgba(0,0,0,0.8)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.8)] hover:border-white/25">
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-white to-[#888888] opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+      <h3 class="text-base font-semibold mb-1.5 text-white font-display">📄 Resume</h3>
+      <p class="text-xs md:text-[0.84rem] text-white/60 leading-relaxed m-0">Update your resume file</p>
     </a>
   </div>
 
-  <div class="dashboard-info card">
-    <h3>Admin Tips</h3>
-    <ul>
-      <li>✔ Keep project images optimized</li>
-      <li>✔ Use clear titles &amp; descriptions</li>
-      <li>✔ Regularly review comments</li>
+  <div class="bg-[#0a0a0a] border border-white/[0.08] rounded-2xl p-6 shadow-[0_8px_28px_rgba(0,0,0,0.8)]">
+    <h3 class="text-xs uppercase tracking-wider font-semibold text-white/50 mb-3 font-display">Admin Tips</h3>
+    <ul class="list-none flex flex-col gap-2 p-0 m-0">
+      <li class="text-sm text-white/70 flex items-center gap-2"><span class="text-emerald-400">✔</span> Keep project images optimized</li>
+      <li class="text-sm text-white/70 flex items-center gap-2"><span class="text-emerald-400">✔</span> Use clear titles &amp; descriptions</li>
+      <li class="text-sm text-white/70 flex items-center gap-2"><span class="text-emerald-400">✔</span> Regularly review comments</li>
     </ul>
   </div>
 </section>
